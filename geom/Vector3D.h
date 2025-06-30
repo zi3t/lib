@@ -15,23 +15,22 @@
 
 #include <iostream>
 #include <iomanip>
-#include <math.h>
+#include <cmath>
 #include <random>
 #include <sstream>
-using namespace std;
 
 #define EPSILON (1E-8)
 
 class Vector3D {
 public:
-    friend ostream &operator<<( ostream &os, const Vector3D& vector);
-    friend Vector3D operator+(float s, const Vector3D& vector);
-    friend Vector3D operator-(float s, const Vector3D& vector);
-    friend Vector3D operator*(float s, const Vector3D& vector);
-    friend Vector3D operator/(float s, const Vector3D& vector);
+    friend std::ostream &operator<<( std::ostream &os, const Vector3D& std::vector);
+    friend Vector3D operator+(float s, const Vector3D& std::vector);
+    friend Vector3D operator-(float s, const Vector3D& std::vector);
+    friend Vector3D operator*(float s, const Vector3D& std::vector);
+    friend Vector3D operator/(float s, const Vector3D& std::vector);
     
     Vector3D(float x=0.0f, float y=0.0f, float z=0.0f);
-    Vector3D(const Vector3D& vector);
+    Vector3D(const Vector3D& std::vector);
     virtual ~Vector3D();
     
     //Setter and Getter
@@ -49,7 +48,7 @@ public:
     Vector3D operator-();
     float operator*(Vector3D other); //dot-product
     Vector3D operator*(float s); //scaling with a factor
-    operator float(); //cast a vector to a float value
+    operator float(); //cast a std::vector to a float value
     
     //
     void println();
@@ -62,8 +61,8 @@ public:
     //Static section
     static bool equals(Vector3D& lhs, Vector3D& rhs); //with pointer to point
     static bool equals(Vector3D*& lhs, Vector3D*& rhs); //with pointer to point
-    static string toString(Vector3D& point);
-    static string toString(Vector3D*& point);
+    static std::string toString(Vector3D& point);
+    static std::string toString(Vector3D*& point);
     
 private:
     float x, y, z;   

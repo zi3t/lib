@@ -17,7 +17,7 @@
 #include "util/Point.h"
 #include <iostream>
 #include <iomanip>
-using namespace std;
+
 
 void slistDemo1(){
     SLinkedList<int> slist;
@@ -32,29 +32,29 @@ void slistDemo2(){
     list1.add(new Point(12.5f, 22.3f)); 
     
     for(SLinkedList<Point*>::Iterator it = list1.begin(); it != list1.end(); it++)
-        cout << **it << endl;
+        std::cout << **it << std::endl;
     
     Point* p1 = new Point(24.6f, 23.1f); //found in list
     Point* p2 = new Point(124.6f, 23.1f); //not found
-    cout << *p1 << "=> " << (list1.contains(p1)? "found; " : "not found; ")
-                << " indexOf returns: " << list1.indexOf(p1) << endl;
-    cout << *p2 << "=> " << (list1.contains(p2)? "found; " : "not found; ")
-                << " indexOf returns: " << list1.indexOf(p2) << endl;
+    std::cout << *p1 << "=> " << (list1.contains(p1)? "found; " : "not found; ")
+                << " indexOf returns: " << list1.indexOf(p1) << std::endl;
+    std::cout << *p2 << "=> " << (list1.contains(p2)? "found; " : "not found; ")
+                << " indexOf returns: " << list1.indexOf(p2) << std::endl;
     
     ///Different results if not pass &Point::equals
-    cout << endl << endl;
+    std::cout << std::endl << std::endl;
     SLinkedList<Point*> list2(&SLinkedList<Point*>::free);
     list2.add(new Point(23.2f, 25.4f));
     list2.add(new Point(24.6f, 23.1f));  
     list2.add(new Point(12.5f, 22.3f)); 
     
     for(SLinkedList<Point*>::Iterator it = list2.begin(); it != list2.end(); it++)
-        cout << **it << endl;
+        std::cout << **it << std::endl;
     
-    cout << *p1 << "=> " << (list2.contains(p1)? "found; " : "not found; ")
-                << " indexOf returns: " << list2.indexOf(p1) << endl;
-    cout << *p2 << "=> " << (list2.contains(p2)? "found; " : "not found; ")
-                << " indexOf returns: " << list2.indexOf(p2) << endl;
+    std::cout << *p1 << "=> " << (list2.contains(p1)? "found; " : "not found; ")
+                << " indexOf returns: " << list2.indexOf(p1) << std::endl;
+    std::cout << *p2 << "=> " << (list2.contains(p2)? "found; " : "not found; ")
+                << " indexOf returns: " << list2.indexOf(p2) << std::endl;
     
     delete p1; delete p2;
 }

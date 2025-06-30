@@ -32,11 +32,11 @@ private:
         elements[aidx] = elements[bidx];
         elements[bidx] = temp;
     };
-    void quicksort(T* elements, int size, int (*comparator)(T&,T&)=0, int (*pivotSelection)(T*, int)=0){
+    void quicksort(T* elements, int size, int (*comparator)(T&,T&) = nullptr, int (*pivotSelection)(T*, int) = nullptr){
         if(size >= 2){
             //pickup a pivot
             int pivot;
-            if(pivotSelection != 0) pivot = pivotSelection(elements, size);
+            if(pivotSelection != nullptr) pivot = pivotSelection(elements, size);
             else pivot = pickupPivot(elements, size);
             
             //swap the pivot with the first
@@ -72,8 +72,8 @@ private:
         }
     }
     
-    static int compare(T& lhs, T& rhs, int (*comparator)(T&,T&)=0){
-        if(comparator != 0) return comparator(lhs, rhs);
+    static int compare(T& lhs, T& rhs, int (*comparator)(T&,T&) = nullptr){
+        if(comparator != nullptr) return comparator(lhs, rhs);
         else{
             if(lhs < rhs) return -1;
             else if(lhs > rhs) return +1;

@@ -15,6 +15,11 @@
 #include "tree/BST.h"
 #include "list/DLinkedList.h"
 #include "stacknqueue/Queue.h"
+#include <string>
+#include <iostream>
+using std::string;
+using std::cout;
+using std::endl;
 
 #define XNode typename BST<K, V>::Node
 
@@ -22,34 +27,34 @@ template <class K, class V>
 class AVL : public BST<K, V>
 {
 public:
-    void add(K key, V value = 0)
+    void add(K key, V value = {})
     {
         this->pRoot = add(this->pRoot, new XNode(typename BST<K, V>::Entry(key, value)));
         this->count += 1;
     }
-    V remove(K key, bool *success = 0)
+    V remove(K key, bool *success = nullptr)
     {
-        V retValue = 0; //O: NULL
+        V retValue{}; // default value
         bool success_;
         this->pRoot = remove(this->pRoot, key, success_, retValue);
         if (success_)
             this->count -= 1;
-        if (success != 0)
+        if (success != nullptr)
             *success = success_;
 
         return retValue;
     }
     int height()
     {
-        if (this->pRoot == 0)
+        if (this->pRoot == nullptr)
             return 0;
         return this->pRoot->height();
     }
-    void println(string (*entry2str)(K &, V &) = 0)
+    void println(std::string (*entry2str)(K &, V &) = nullptr)
     {
-        cout << "Tree height: " << this->height() << endl;
-        cout << "Tree nodes:" << endl;
-        cout << this->toString(entry2str, true) << endl;
+        std::cout << "Tree height: " << this->height() << std::endl;
+        std::cout << "Tree nodes:" << std::endl;
+        std::cout << this->toString(entry2str, true) << std::endl;
     }
     /*
      * bfactor: designed for being used to test AVL tree
@@ -57,10 +62,10 @@ public:
      * It returns a list of balance factor (string) of nodes visited with BFS-traversal
      * (see AVLTest for example)
      */
-    DLinkedList<string> bfactor()
+    DLinkedList<std::string> bfactor()
     {
-        DLinkedList<string> list;
-        if (this->pRoot == 0)
+        DLinkedList<std::string> list;
+        if (this->pRoot == nullptr)
             return list;
 
         Queue<XNode *> queue;
@@ -82,14 +87,14 @@ public:
                 delete pNode; //because alloc in [1] or [2]
                 continue;
             }
-            if ((pNode->pLeft == 0) && (pNode->pRight == 0))
+            if ((pNode->pLeft == nullptr) && (pNode->pRight == nullptr))
                 continue;
 
-            if (pNode->pLeft != 0)
+            if (pNode->pLeft != nullptr)
                 queue.push(pNode->pLeft);
             else
                 queue.push(new XNode()); //[1]
-            if (pNode->pRight != 0)
+            if (pNode->pRight != nullptr)
                 queue.push(pNode->pRight);
             else
                 queue.push(new XNode()); //[2]
@@ -169,7 +174,7 @@ private:
 
     XNode *rebalance(XNode *root)
     {
-        if (root == 0)
+        if (root == nullptr)
             return root;
 
         root->updateHeight();
@@ -209,7 +214,7 @@ private:
 
     XNode *add(XNode *root, XNode *newNode)
     {
-        if (root == 0)
+        if (root == nullptr)
             return newNode;
         if (newNode->data.key < root->data.key)
             root->pLeft = add(root->pLeft, newNode);
@@ -221,10 +226,10 @@ private:
 
     XNode *remove(XNode *root, K key, bool &success, V &retValue)
     {
-        if (root == 0)
+        if (root == nullptr)
         {
             success = false;
-            return 0;
+            return nullptr;
         }
 
         XNode *newRoot = root;
@@ -234,19 +239,19 @@ private:
             root->pRight = remove(root->pRight, key, success, retValue);
         else
         {
-            if ((root->pLeft == 0) || (root->pRight == 0))
+            if ((root->pLeft == nullptr) || (root->pRight == nullptr))
             {
-                newRoot = ((root->pLeft == 0) ? root->pRight : root->pLeft);
+                newRoot = ((root->pLeft == nullptr) ? root->pRight : root->pLeft);
                 success = true;
                 retValue = root->data.value;
-                root->data.value = 0;
+                root->data.value = nullptr;
                 delete root;
             }
             else
             {
                 V backup = root->data.value;
                 XNode *largestOnLeft = root->pLeft;
-                while (largestOnLeft->pRight != 0)
+                while (largestOnLeft->pRight != nullptr)
                     largestOnLeft = largestOnLeft->pRight;
                 root->data = largestOnLeft->data;
                 root->pLeft = remove(root->pLeft, largestOnLeft->data.key, success, retValue);

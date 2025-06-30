@@ -15,17 +15,21 @@
 
 #include <iostream>
 #include <iomanip>
-#include <math.h>
+#include <cmath>
 #include <random>
 #include <sstream>
-using namespace std;
+#include <string>
+using std::string;
+using std::stringstream;
+using std::cout;
+using std::endl;
 
 #define EPSILON (1E-8)
 
 class Point{
 private:
     float x, y, z;
-    friend ostream &operator<<( ostream &os, const Point& point);
+    friend std::ostream &operator<<( std::ostream &os, const Point& point);
     
 public:
     Point(float x=0.0f, float y=0.0f, float z=0.0f){
@@ -63,7 +67,7 @@ public:
         return x;
     }
     float radius(){
-        return sqrt(x*x + y*y + z*z);
+        return std::sqrt(x*x + y*y + z*z);
     }
 
     //with point object
@@ -82,17 +86,17 @@ public:
         return  *lhs == *rhs;
     }
     
-    static string point2str(Point& point){
-        stringstream os;
+    static std::string point2str(Point& point){
+        std::stringstream os;
         os  << point;
         return os.str();
     }
-    static string point2str(Point*& point){
+    static std::string point2str(Point*& point){
         return point2str(*point);
     }
 
     operator float(){
-        return sqrt(x*x + y*y + z*z);
+        return std::sqrt(x*x + y*y + z*z);
     }
      
     static Point* genPoints(int size, float minValue=0, float maxValue=1, 
@@ -105,7 +109,7 @@ public:
             engine = new std::default_random_engine(static_cast<long unsigned int>(seedValue));
         else
             engine = new std::default_random_engine(static_cast<long unsigned int>(time(0)));
-        uniform_real_distribution<double> dist(minValue, maxValue);
+        std::uniform_real_distribution<double> dist(minValue, maxValue);
         
         //
         for(int idx=0; idx < size; idx++){
@@ -118,22 +122,22 @@ public:
         return head;
     }
     static void println(Point* head, int size){
-        stringstream os;
+        std::stringstream os;
         os << "[";
         for(int idx=0; idx < size-1; idx++)
             os << head[idx] << ", ";
         if(size > 0) os << head[size-1] << "]";
         else os << "]";
-        cout << os.str() << endl;
+        std::cout << os.str() << std::endl;
         return;
     }
    
 };
-ostream &operator<<( ostream &os, const Point& point){
-    os << "P(" << fixed 
-            << setw(6) << setprecision(2) << point.x << "," 
-            << setw(6) << setprecision(2) << point.y << ","
-            << setw(6) << setprecision(2) << point.z
+std::ostream &operator<<( std::ostream &os, const Point& point){
+    os << "P(" << std::fixed 
+            << std::setw(6) << std::setprecision(2) << point.x << "," 
+            << std::setw(6) << std::setprecision(2) << point.y << ","
+            << std::setw(6) << std::setprecision(2) << point.z
        << ")";
     return os;
 }

@@ -14,7 +14,7 @@
 #define TREE_IBST_H_
 #include <memory>
 #include <string>
-using namespace std;
+
 
 #include "list/DLinkedList.h"
 /* 
@@ -27,7 +27,7 @@ using namespace std;
 template<class K, class V>
 class IBST{
 public:
-    virtual void add(K key, V value=0)=0;
+    virtual void add(K key, V value = {}) = 0;
     
     /**
      * 
@@ -38,7 +38,7 @@ public:
      * 
      * @return value (a pointer type) stored in the tree
      */
-    virtual V remove(K key, bool* success=0)=0;
+    virtual V remove(K key, bool* success = nullptr) = 0;
     virtual V search(K key, bool& found)=0;
     virtual int size()=0;
     virtual int height()=0;
@@ -46,7 +46,7 @@ public:
     virtual bool empty()=0;
     virtual DLinkedList<V> ascendingList()=0;
     virtual DLinkedList<V> descendingList()=0;
-    virtual string toString(string (*entry2str)(K&,V&)=0, bool avl=false)=0;
+    virtual std::string toString(std::string (*entry2str)(K&, V&) = nullptr, bool avl=false) = 0;
 };
 
 

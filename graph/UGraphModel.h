@@ -37,9 +37,9 @@ public:
     void connect(T from, T to, float weight=0){
         typename AbstractGraph<T>::VertexNode *nodeF = this->getVertexNode(from);
         typename AbstractGraph<T>::VertexNode *nodeT = this->getVertexNode(to);
-        if (nodeF == 0)
+        if (nodeF == nullptr)
             throw VertexNotFoundException(this->vertex2Str(*nodeF));
-        if (nodeT == 0)
+        if (nodeT == nullptr)
             throw VertexNotFoundException(this->vertex2Str(*nodeT));
         if (nodeF->equals(nodeT))
         {
@@ -54,13 +54,13 @@ public:
     void disconnect(T from, T to){
          typename AbstractGraph<T>::VertexNode *nodeF = this->getVertexNode(from);
         typename AbstractGraph<T>::VertexNode *nodeT = this->getVertexNode(to);
-        if (nodeF == 0)
+        if (nodeF == nullptr)
             throw VertexNotFoundException(this->vertex2Str(*nodeF));
-        if (nodeT == 0)
+        if (nodeT == nullptr)
             throw VertexNotFoundException(this->vertex2Str(*nodeT));
 
         typename AbstractGraph<T>::Edge *edge = nodeF->getEdge(nodeT);
-        if (edge == 0)
+        if (edge == nullptr)
             throw EdgeNotFoundException(this->edge2Str(*edge));
         if (nodeF->equals(nodeT))
             nodeF->removeTo(nodeT);
@@ -72,7 +72,7 @@ public:
     }
     void remove(T vertex){
         typename AbstractGraph<T>::VertexNode *nodeF = this->getVertexNode(vertex);
-        if (nodeF == 0)
+        if (nodeF == nullptr)
             throw VertexNotFoundException(this->vertex2Str(*nodeF));
 
         typename DLinkedList<typename AbstractGraph<T>::VertexNode *>::Iterator nodeIt;
@@ -81,7 +81,7 @@ public:
         {
             typename AbstractGraph<T>::VertexNode *nodeT = *nodeIt;
             typename AbstractGraph<T>::Edge *edge = nodeF->getEdge(nodeT);
-            if (edge != 0)
+            if (edge != nullptr)
             {
                 nodeF->removeTo(nodeT);
                 nodeT->removeTo(nodeF);

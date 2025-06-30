@@ -12,7 +12,7 @@ The unit tests are driven by `tests.cpp`.  Compile them with g++ and then run
 the resulting executable:
 
 ```bash
-g++ -std=c++11 -I. tests.cpp -o tests && ./tests
+g++ -std=c++20 -I. tests.cpp -o tests && ./tests
 ```
 
 ## Continuous integration

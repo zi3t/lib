@@ -19,21 +19,19 @@
 #include <fstream>
 #include <vector>
 #include <unordered_map>
-#include <math.h>
-
-using namespace std;
+#include <cmath>
 
 class DataFrame{
 private:
-    unordered_map<string, vector<string> > map;
-    vector<string> columns;
+    std::unordered_map<std::string, std::vector<std::string> > map;
+    std::vector<std::string> columns;
     int m_nrows;
   
 public:
     DataFrame(){
         m_nrows = 0;
     }
-    DataFrame(string filename, char delimiter=','){
+    DataFrame(std::string filename, char delimiter=','){
         m_nrows = 0;
         read(filename, delimiter);
     }
@@ -62,36 +60,36 @@ public:
         return map.size();
     }
     
-    void add(string col_name, vector<string>& col_data){
+    void add(std::string col_name, std::vector<std::string>& col_data){
         columns.push_back(col_name);
         m_nrows = max(m_nrows, (int)col_data.size());
-        this->map.insert({col_name, vector<string>(col_data)});
+        this->map.insert({col_name, std::vector<std::string>(col_data)});
     }
     //
-    vector<string>& operator[](string col_name){
+    std::vector<std::string>& operator[](std::string col_name){
         return this->map[col_name];
     }
-    vector<string> get_columns(){
+    std::vector<std::string> get_columns(){
         return this->columns;
     }
-    void read(string filename, char delimiter=','){
+    void read(std::string filename, char delimiter=','){
         //open stream
         ifstream datastream(filename);
         if(!datastream.is_open()){
-            cerr << filename << ": couldn't open for reading" << endl;
+            cerr << filename << ": couldn't open for reading" << std::endl;
         }
         //read header
         read_header(datastream, delimiter);
                 
         //read lines
-        string line;
+        std::string line;
         while(getline(datastream, line)){
             //parse line
             istringstream linestream(line);
-            string item;
+            std::string item;
             int col_idx = 0;
             while(getline(linestream, item, delimiter)){
-                string col_name = columns[col_idx];
+                std::string col_name = columns[col_idx];
                 this->map[col_name].push_back(item);
                 col_idx += 1;
             }
@@ -100,11 +98,11 @@ public:
         //close stream
         datastream.close();
     }
-    void write(string filename, char delimiter=','){
+    void write(std::string filename, char delimiter=','){
         //open stream
         ofstream datastream(filename);
         if(!datastream.is_open()){
-            cerr << filename << ": couldn't open for writing" << endl;
+            cerr << filename << ": couldn't open for writing" << std::endl;
         }
         //write header
         write_header(datastream, delimiter);
@@ -114,18 +112,18 @@ public:
         int _ncols = ncols();
         for(int rowIdx=0; rowIdx < _nrows; rowIdx++){
             for(int colIdx=0; colIdx < _ncols - 1; colIdx++){
-                string col_name = columns[colIdx];
+                std::string col_name = columns[colIdx];
                 if(rowIdx > this->map[col_name].size() - 1)
                     datastream << "None" << delimiter << " ";
                 else
                     datastream << this->map[col_name][rowIdx] << delimiter << " ";
             }
             if(_ncols > 0){
-                string col_name = columns[_ncols - 1];
+                std::string col_name = columns[_ncols - 1];
                 if(rowIdx > this->map[col_name].size() - 1)
-                    datastream << "None" << endl;
+                    datastream << "None" << std::endl;
                 else
-                    datastream << this->map[col_name][rowIdx] << endl;
+                    datastream << this->map[col_name][rowIdx] << std::endl;
             }
         }
         
@@ -135,14 +133,14 @@ public:
     
 private:
     void read_header(ifstream& datastream, char delimiter=','){
-        string line;
+        std::string line;
         if(getline(datastream, line)){
             //parse line
             istringstream linestream(line);
-            string col;
+            std::string col;
             while(getline(linestream, col, delimiter)){
                 this->columns.push_back(col);
-                this->map[col] = vector<string>();
+                this->map[col] = std::vector<std::string>();
             }
         }
     }
@@ -150,7 +148,7 @@ private:
         for(int cidx=0; cidx < this->columns.size() - 1; cidx++)
             datastream << this->columns[cidx] << delimiter;
         if(this->columns.size() > 0)
-            datastream << this->columns[this->columns.size() - 1] << endl;
+            datastream << this->columns[this->columns.size() - 1] << std::endl;
     }
 };
 

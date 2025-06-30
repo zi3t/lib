@@ -19,7 +19,7 @@
 #include <iomanip>
 #include <string>
 #include <sstream>
-using namespace std;
+
 
 
 void LHofLH(){
@@ -69,13 +69,13 @@ void leftBalance2(){
     AVL<int, int*> tree;
     int keys1[] = {50, 40, 60, 30, 45, 20};
     int nodes_exp1[] = {40, 30, 50, 20, 45, 60};
-    string bfactor_exp1[] = {sEH, sLH, sEH, sEH, sEMPTY, sEH, sEH}; 
+    std::string bfactor_exp1[] = {sEH, sLH, sEH, sEH, sEMPTY, sEH, sEH}; 
     int keys2[] = {50, 40, 60, 30, 45, 35};
     int nodes_exp2[] = {40, 30, 50, 35, 45, 60};
-    string bfactor_exp2[] = {sEH, sRH, sEH, sEMPTY, sEH, sEH, sEH}; 
+    std::string bfactor_exp2[] = {sEH, sRH, sEH, sEMPTY, sEH, sEH, sEH}; 
 
     for(int idx=0; idx < 6; idx++) tree.add(keys1[idx] );
-    List<string> factor1 = tree.bfactor();
+    List<std::string> factor1 = tree.bfactor();
     factor1.contains(bfactor_exp1, 7);
 
     List<int> nodes1 = tree.bfsKey();
@@ -84,7 +84,7 @@ void leftBalance2(){
     tree.clear();
     for(int idx=0; idx < 6; idx++) tree.add(keys2[idx]);
 
-    List<string> factor2 = tree.bfactor();
+    List<std::string> factor2 = tree.bfactor();
     factor2.contains(bfactor_exp2, 7);
 
     List<int> nodes2 = tree.bfsKey();
@@ -247,21 +247,21 @@ void AVLDemo7(){
     int keys[] = {50, 30, 60, 20, 40, 55, 10, 25, 35, 5};
     for(int idx=0; idx < 10; idx++) tree.add(keys[idx]);
     tree.println();
-    DLinkedList<string> factor = tree.bfactor();
-    cout << "Balance Factors: " << endl;
+    DLinkedList<std::string> factor = tree.bfactor();
+    std::cout << "Balance Factors: " << std::endl;
     factor.println();
 }
 
 void AVLDemo8(){
     AVL<int, int*> tree;
     for(int idx=0; idx <12; idx++) tree.add(idx);
-    cout << "AVL: #nodes: " << tree.size() << endl;
-    cout << "AVL: height: " << tree.height() << endl;
+    std::cout << "AVL: #nodes: " << tree.size() << std::endl;
+    std::cout << "AVL: height: " << tree.height() << std::endl;
     tree.println();
 }
 
-string pointEntry2Str(float& key, Point*& point){
-    stringstream os;
+std::string pointEntry2Str(float& key, Point*& point){
+    std::stringstream os;
     os << *point;
     return os.str();
 }

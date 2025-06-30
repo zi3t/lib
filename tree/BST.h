@@ -18,6 +18,8 @@
 #include "stacknqueue/Queue.h"
 #include <string>
 #include <sstream>
+#include <algorithm>
+using std::string;
 
 /*IMPOTANT: 
  *  >> Can change nEMPTY to another value
@@ -48,9 +50,9 @@ protected:
 public:
     BST();
     ~BST();
-    void add(K key, V value=0);
-    V remove(K key, bool* success=0);
-    V search(K key, bool& found); //return NULL if not found
+    void add(K key, V value = {});
+    V remove(K key, bool* success = nullptr);
+    V search(K key, bool& found); //return default value if not found
     int size();
     int height();
     void clear();
@@ -66,12 +68,12 @@ public:
     bool empty(){
         return this->count == 0;
     }
-    string toString(string (*entry2str)(K&,V&)=0, bool avl=false){
-        if(this->pRoot == 0) return "(NULL)";
+    std::string toString(std::string (*entry2str)(K&, V&) = nullptr, bool avl=false){
+        if(this->pRoot == nullptr) return "(NULL)";
         else return this->pRoot->toString(entry2str, avl);
     }
-    void println(string (*entry2str)(K&,V&)=0, bool avl=false){
-        cout << toString(entry2str, avl) << endl;
+    void println(std::string (*entry2str)(K&, V&) = nullptr, bool avl=false){
+        std::cout << toString(entry2str, avl) << std::endl;
     }
     
     
@@ -88,9 +90,9 @@ protected:
     void select(Node* pRoot, K min, K max, DLinkedList<V>& list);
     
     static void remove(Node* pRoot){
-        if(pRoot == 0) return;
-        if(pRoot->pLeft != 0) remove(pRoot->pLeft);
-        if(pRoot->pRight != 0) remove(pRoot->pRight);
+        if(pRoot == nullptr) return;
+        if(pRoot->pLeft != nullptr) remove(pRoot->pLeft);
+        if(pRoot->pRight != nullptr) remove(pRoot->pRight);
         delete pRoot;
     }
     
@@ -106,15 +108,15 @@ public:
         friend class BST<K, V>;
 
     public:
-        Entry(K key, V value=0){
+        Entry(K key, V value = nullptr){
             this->key = key;
             this->value = value;
         }
-        string toString(string (*entry2str)(K&,V&)=0){
-            if(entry2str != 0) return entry2str(key, value);
+        std::string toString(std::string (*entry2str)(K&,V&) = nullptr){
+            if(entry2str != nullptr) return entry2str(key, value);
             else{
-                stringstream entryos;
-                if(value != 0)
+                std::stringstream entryos;
+                if(value != nullptr)
                     entryos << "<" << key << ", " << *(value) << ">";
                 else entryos << key;
                 return entryos.str();
@@ -135,26 +137,26 @@ public:
         
         friend class BST<K, V>;
     public:
-        Node():data(0,0){
-            this->pLeft = 0;
-            this->pRight = 0;
+        Node():data(0, nullptr){
+            this->pLeft = nullptr;
+            this->pRight = nullptr;
             this->bfactor = EMPTY;
             this->height_ = 1;
         }
-        Node(Entry newdata, Node* pLeft=0, Node* pRight=0): data(newdata){
+        Node(Entry newdata, Node* pLeft = nullptr, Node* pRight = nullptr): data(newdata){
             this->pLeft = pLeft;
             this->pRight = pRight;
             this->bfactor = EH;
             this->height_ = 1;
         }
         ~Node(){
-            if(data.value != 0) delete data.value;
+            if(data.value != nullptr) delete data.value;
         }
         void updateHeight(){
-            int leftH =0, rightH=0;
-            if(pLeft != 0) leftH = pLeft->height();
-            if(pRight != 0) rightH = pRight->height();
-            height_ = 1 + max(leftH, rightH);
+            int leftH = 0, rightH = 0;
+            if(pLeft != nullptr) leftH = pLeft->height();
+            if(pRight != nullptr) rightH = pRight->height();
+            height_ = 1 + std::max(leftH, rightH);
             //
             bfactor = rightH - leftH;
         }
@@ -167,29 +169,29 @@ public:
         bool isRH(){ return bfactor >= RH; }
         void markRH() { bfactor = RH; }
         bool isBalanced(){ return (bfactor >= -1) && (bfactor <= +1); }
-        string balance(){
+        std::string balance(){
             if(isLH()) return "LH ";
             else if(isEH()) return "EH ";
             else return "RH ";
         }
-        
-        string toString(string (*entry2str)(K&,V&)=0, bool avl=false){
-            stringstream nodestr;
+
+        std::string toString(std::string (*entry2str)(K&,V&) = nullptr, bool avl=false){
+            std::stringstream nodestr;
             if(avl){
-                if((pLeft == 0) && (pRight == 0))
+                if((pLeft == nullptr) && (pRight == nullptr))
                     nodestr << "[" << data.toString(entry2str) << ":" << balance() << "]";
-                if((pLeft == 0) && (pRight != 0))
+                if((pLeft == nullptr) && (pRight != nullptr))
                     nodestr << " (" 
                             << data.toString(entry2str) << ":" << balance() << "[.]" 
                             << pRight->toString(entry2str, avl)
                             << ")";
-                if((pLeft != 0) && (pRight == 0))
+                if((pLeft != nullptr) && (pRight == nullptr))
                     nodestr << " (" 
                             << data.toString(entry2str) << ":" << balance()
                             << pLeft->toString(entry2str, avl)
                             << "[.]"
                             << ")";
-                if((pLeft != 0) && (pRight != 0))
+                if((pLeft != nullptr) && (pRight != nullptr))
                     nodestr << " (" 
                             << data.toString(entry2str)  << ":" << balance()
                             << pLeft->toString(entry2str, avl)
@@ -197,20 +199,20 @@ public:
                             << ") ";
             }
             else{
-                if((pLeft == 0) && (pRight == 0))
+                if((pLeft == nullptr) && (pRight == nullptr))
                     nodestr << "[" << data.toString(entry2str) << "]";
-                if((pLeft == 0) && (pRight != 0))
+                if((pLeft == nullptr) && (pRight != nullptr))
                     nodestr << " (" 
                             << data.toString(entry2str) << "[.]" 
                             << pRight->toString(entry2str)
                             << ")";
-                if((pLeft != 0) && (pRight == 0))
+                if((pLeft != nullptr) && (pRight == nullptr))
                     nodestr << " (" 
                             << data.toString(entry2str) 
                             << pLeft->toString(entry2str)
                             << "[.]"
                             << ")";
-                if((pLeft != 0) && (pRight != 0))
+                if((pLeft != nullptr) && (pRight != nullptr))
                     nodestr << " (" 
                             << data.toString(entry2str) 
                             << pLeft->toString(entry2str)
@@ -238,7 +240,7 @@ int BST<K,V>::Node::EMPTY = nEMPTY;
 template<class K, class V>
 BST<K, V>::BST() {
     count = 0;
-    pRoot = 0;
+    pRoot = nullptr;
 }
 
 
@@ -257,7 +259,7 @@ void BST<K, V>::add(K key, V value) {
 template<class K, class V>
 typename BST<K, V>::Node* BST<K, V>::
 add(Node* pRoot, Entry data){
-    if(pRoot == 0) return new BST<K, V>::Node(data, 0, 0);
+    if(pRoot == nullptr) return new BST<K, V>::Node(data, nullptr, nullptr);
     if(data.key < pRoot->data.key)
         pRoot->pLeft = this->add(pRoot->pLeft, data);
     else
@@ -273,11 +275,11 @@ int BST<K, V>::size(){
 
 template<class K, class V>
 V BST<K, V>::remove(K key, bool* success){
-    V retValue = 0;
+    V retValue{};
     bool success_;
     this->pRoot = remove(this->pRoot, key, success_, retValue);
     if(success_) this->count -= 1;
-    if(success != 0) *success = success_;
+    if(success != nullptr) *success = success_;
     
     return retValue;
 }
@@ -286,9 +288,9 @@ V BST<K, V>::remove(K key, bool* success){
 template<class K, class V>
 typename BST<K, V>::Node*  BST<K, V>::
 remove(Node* pRoot, K key, bool& success, V& retValue){
-    if(pRoot == 0){
+    if(pRoot == nullptr){
         success = false;
-        return 0;
+        return nullptr;
     }
     
     if(key < pRoot->data.key){
@@ -301,12 +303,12 @@ remove(Node* pRoot, K key, bool& success, V& retValue){
     }
     else{
         //found at pRoot, delete pRoot
-        if((pRoot->pLeft == 0) || (pRoot->pRight == 0)){
-            Node* newRoot = ((pRoot->pLeft == 0)? pRoot->pRight: pRoot->pLeft);
+        if((pRoot->pLeft == nullptr) || (pRoot->pRight == nullptr)){
+            Node* newRoot = ((pRoot->pLeft == nullptr)? pRoot->pRight: pRoot->pLeft);
             retValue = pRoot->data.value;
             success = true;
-            
-            pRoot->data.value = 0; //value: a pointer; value = NULL => not delete value in ~Node()
+
+            pRoot->data.value = nullptr; // reset value pointer before deletion
             delete pRoot;
             
             return newRoot; 
@@ -316,7 +318,7 @@ remove(Node* pRoot, K key, bool& success, V& retValue){
             V backup = pRoot->data.value; //backup returned value (pRoot->data.value)
             
             Node* pLargestOnLeft = pRoot->pLeft;
-            while(pLargestOnLeft->pRight != 0) pLargestOnLeft = pLargestOnLeft->pRight;
+            while(pLargestOnLeft->pRight != nullptr) pLargestOnLeft = pLargestOnLeft->pRight;
             pRoot->data = pLargestOnLeft->data; //replaced with the largest on left sub-tree
             pRoot->pLeft = remove(pRoot->pLeft, pLargestOnLeft->data.key, success, retValue);
             
@@ -334,18 +336,18 @@ V BST<K, V>::search(K key, bool& found){
 
 template<class K, class V>
 V BST<K, V>::search(Node* pRoot, K key, bool& found){
-    if(pRoot == 0) return 0;
+    if(pRoot == nullptr) return nullptr;
     if(key == pRoot->data.key) {
         //found
         found = true;
         return pRoot->data.value;
     }
     else if(key < pRoot->data.key){
-        if(pRoot->pLeft == 0) return 0;
+        if(pRoot->pLeft == nullptr) return nullptr;
         else return search(pRoot->pLeft, key, found);
     }
     else{
-        if(pRoot->pRight == 0) return 0;
+        if(pRoot->pRight == nullptr) return nullptr;
         else return search(pRoot->pRight, key, found);
     }
 }
@@ -357,7 +359,7 @@ int BST<K, V>::height(){
 
 template<class K, class V>
 int BST<K, V>::height(Node* pRoot){
-    if(pRoot == 0) return 0;
+    if(pRoot == nullptr) return 0;
     else{
         int leftH = height(pRoot->pLeft);
         int rightH = height(pRoot->pRight);
@@ -367,7 +369,7 @@ int BST<K, V>::height(Node* pRoot){
 template<class K, class V>
 void BST<K, V>::clear(){
     remove(this->pRoot);
-    this->pRoot = 0;
+    this->pRoot = nullptr;
     this->count = 0;
 }
 
@@ -380,7 +382,7 @@ DLinkedList<V> BST<K, V>::ascendingList(){
 
 template<class K, class V>
 void BST<K, V>::ascendingList(Node* pRoot, DLinkedList<V>& list){
-    if(pRoot == 0) return;
+    if(pRoot == nullptr) return;
     ascendingList(pRoot->pLeft, list);
     list.add(pRoot->data.value);
     ascendingList(pRoot->pRight, list);
@@ -395,7 +397,7 @@ DLinkedList<V> BST<K, V>::descendingList(){
 
 template<class K, class V>
 void BST<K, V>::descendingList(Node* pRoot, DLinkedList<V>& list){
-    if(pRoot == 0) return;
+    if(pRoot == nullptr) return;
     descendingList(pRoot->pRight, list);
     list.add(pRoot->data.value);
     descendingList(pRoot->pLeft, list);
@@ -404,15 +406,15 @@ void BST<K, V>::descendingList(Node* pRoot, DLinkedList<V>& list){
 template<class K, class V>
 DLinkedList<V> BST<K, V>::dfs(){
     DLinkedList<V> list;
-    if(pRoot == 0) return list;
+    if(pRoot == nullptr) return list;
     
     Stack<Node*> stack;
     stack.push(pRoot);
     while(!stack.empty()){
         Node* pNode = stack.pop();
         list.add(pNode->data.value);
-        if(pNode->pRight != 0) stack.push(pNode->pRight);
-        if(pNode->pLeft != 0) stack.push(pNode->pLeft);
+        if(pNode->pRight != nullptr) stack.push(pNode->pRight);
+        if(pNode->pLeft != nullptr) stack.push(pNode->pLeft);
     }
     return list;
 }
@@ -420,30 +422,30 @@ DLinkedList<V> BST<K, V>::dfs(){
 template<class K, class V>
 DLinkedList<V> BST<K, V>::bfs(){
     DLinkedList<V> list;
-    if(pRoot == 0) return list;
+    if(pRoot == nullptr) return list;
     
     Queue<Node*> queue;
     queue.push(pRoot);
     while(!queue.empty()){
         Node* pNode = queue.pop();
         list.add(pNode->data.value);
-        if(pNode->pLeft != 0) queue.push(pNode->pLeft);
-        if(pNode->pRight != 0) queue.push(pNode->pRight);
+        if(pNode->pLeft != nullptr) queue.push(pNode->pLeft);
+        if(pNode->pRight != nullptr) queue.push(pNode->pRight);
     }
     return list;
 }
 template<class K, class V>
 DLinkedList<K> BST<K, V>::bfsKey(){
     DLinkedList<K> list;
-    if(pRoot == 0) return list;
+    if(pRoot == nullptr) return list;
     
     Queue<Node*> queue;
     queue.push(pRoot);
     while(!queue.empty()){
         Node* pNode = queue.pop();
         list.add(pNode->data.key);
-        if(pNode->pLeft != 0) queue.push(pNode->pLeft);
-        if(pNode->pRight != 0) queue.push(pNode->pRight);
+        if(pNode->pLeft != nullptr) queue.push(pNode->pLeft);
+        if(pNode->pRight != nullptr) queue.push(pNode->pRight);
     }
     return list;
 }
@@ -456,7 +458,7 @@ DLinkedList<V> BST<K, V>::nlr(){
 }
 template<class K, class V>
 void BST<K, V>::nlr(Node* pRoot, DLinkedList<V>& list){
-    if(pRoot == 0) return;
+    if(pRoot == nullptr) return;
     list.add(pRoot->data.value);
     nlr(pRoot->pLeft, list);
     nlr(pRoot->pRight, list);
@@ -470,7 +472,7 @@ DLinkedList<V> BST<K, V>::lrn(){
 }
 template<class K, class V>
 void BST<K, V>::lrn(Node* pRoot, DLinkedList<V>& list){
-    if(pRoot == 0) return;
+    if(pRoot == nullptr) return;
     lrn(pRoot->pLeft, list);
     lrn(pRoot->pRight, list);
     list.add(pRoot->data.value);
@@ -484,7 +486,7 @@ DLinkedList<V> BST<K, V>::lnr(){
 }
 template<class K, class V>
 void BST<K, V>::lnr(Node* pRoot, DLinkedList<V>& list){
-    if(pRoot == 0) return;
+    if(pRoot == nullptr) return;
     lnr(pRoot->pLeft, list);
     list.add(pRoot->data.value);
     lnr(pRoot->pRight, list);
@@ -492,7 +494,7 @@ void BST<K, V>::lnr(Node* pRoot, DLinkedList<V>& list){
 
 template<class K, class V>
 void BST<K, V>::select(Node* pRoot, K min, K max, DLinkedList<V>& list){
-    if(pRoot == 0) return;
+    if(pRoot == nullptr) return;
     
     if(pRoot->data.key < min) select(pRoot->pRight, min, max, list);
     else if(pRoot->data.key == min){

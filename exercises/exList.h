@@ -16,7 +16,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-using namespace std;
+
 
 void listSimpleDemo(){
     int item[] = {19, 34, 22, 4, 8, 32, 78, 89};

@@ -18,7 +18,7 @@
 #include <sstream>
 #include <iostream>
 #include <type_traits>
-using namespace std;
+
 
 
 template<class T>
@@ -46,8 +46,8 @@ protected:
     
 public:
     DLinkedList(
-            void (*deleteUserData)(DLinkedList<T>*)=0, 
-            bool (*itemEqual)(T&, T&)=0); 
+            void (*deleteUserData)(DLinkedList<T>*) = nullptr,
+            bool (*itemEqual)(T&, T&) = nullptr);
     DLinkedList(const DLinkedList<T>& list);
     DLinkedList<T>& operator=(const DLinkedList<T>& list);
     ~DLinkedList();
@@ -57,26 +57,26 @@ public:
     void    add(T e);
     void    add(int index, T e);
     T       removeAt(int index);
-    bool    removeItem(T item, void (*removeItemData)(T)=0);
+    bool    removeItem(T item, void (*removeItemData)(T)=nullptr);
     bool    empty();
     int      size();
     void    clear();
     T&      get(int index);
     int      indexOf(T item);
     bool    contains(T item);
-    string  toString(string (*item2str)(T&)=0 );
+    std::string  toString(std::string (*item2str)(T&) = nullptr );
     //Inherit from IList: END
     
-    void    println(string (*item2str)(T&)=0 ){
-        cout << toString(item2str) << endl;
+    void    println(std::string (*item2str)(T&) = nullptr ){
+        std::cout << toString(item2str) << std::endl;
     }
-    void setDeleteUserDataPtr(void (*deleteUserData)(DLinkedList<T>*) = 0){
+    void setDeleteUserDataPtr(void (*deleteUserData)(DLinkedList<T>*) = nullptr){
         this->deleteUserData = deleteUserData;
     }
     
     bool contains(T array[], int size){
         int idx = 0;
-        for(DLinkedList<T>::Iterator it = begin(); it != end(); it++){
+        for(DLinkedList<T>::Iterator it = begin(); it != end(); ++it){
             if(!equals(*it, array[idx++], this->itemEqual) ) return false;
         }
         return true;
@@ -133,7 +133,7 @@ public:
     
 protected:
     static bool equals(T& lhs, T& rhs, bool (*itemEqual)(T&, T& )){
-        if(itemEqual == 0) return lhs == rhs;
+        if(itemEqual == nullptr) return lhs == rhs;
         else return itemEqual(lhs, rhs);
     }
     void copyFrom(const DLinkedList<T>& list);
@@ -153,11 +153,11 @@ public:
         friend class DLinkedList<T>;
         
     public:
-        Node(Node* next=0, Node* prev=0){
+        Node(Node* next=nullptr, Node* prev=nullptr){
             this->next = next;
             this->prev = prev;
         }
-        Node(T data, Node* next=0, Node* prev=0){
+        Node(T data, Node* next=nullptr, Node* prev=nullptr){
             this->data = data;
             this->next = next;
             this->prev = prev;
@@ -171,14 +171,14 @@ public:
         Node* pNode;
         
     public:
-        Iterator(DLinkedList<T>* pList=0, bool begin=true){
+        Iterator(DLinkedList<T>* pList=nullptr, bool begin=true){
             if(begin){
-                if(pList !=0) this->pNode = pList->head->next;
-                else pNode = 0;
+                if(pList !=nullptr) this->pNode = pList->head->next;
+                else pNode = nullptr;
             }
             else{
-                if(pList !=0) this->pNode = pList->tail;
-                else pNode = 0;
+                if(pList !=nullptr) this->pNode = pList->tail;
+                else pNode = nullptr;
             }
             this->pList = pList;
         }
@@ -188,11 +188,11 @@ public:
             this->pList = iterator.pList;
             return *this;
         }
-        void remove(void (*removeItemData)(T)=0){
+        void remove(void (*removeItemData)(T)=nullptr){
             pNode->prev->next = pNode->next;
             pNode->next->prev = pNode->prev;
             Node* pNext = pNode->prev; //MUST prev, so iterator++ will go to end
-            if(removeItemData != 0) removeItemData(pNode->data);
+            if(removeItemData != nullptr) removeItemData(pNode->data);
             delete pNode;
             pNode = pNext;
             pList->count -= 1;
@@ -224,14 +224,14 @@ public:
         Node* pNode;
         
     public:
-        BWDIterator(DLinkedList<T>* pList=0, bool last=true){
+        BWDIterator(DLinkedList<T>* pList=nullptr, bool last=true){
             if(last){
-                if(pList !=0) this->pNode = pList->tail->prev;
-                else pNode = 0;
+                if(pList !=nullptr) this->pNode = pList->tail->prev;
+                else pNode = nullptr;
             }
             else{
-                if(pList !=0) this->pNode = pList->head;
-                else pNode = 0;
+                if(pList !=nullptr) this->pNode = pList->head;
+                else pNode = nullptr;
             }
             this->pList = pList;
         }
@@ -241,11 +241,11 @@ public:
             this->pList = iterator.pList;
             return *this;
         }
-        void remove(void (*removeItemData)(T)=0){
+        void remove(void (*removeItemData)(T)=nullptr){
             pNode->prev->next = pNode->next;
             pNode->next->prev = pNode->prev;
             Node* pNext = pNode->next; //MUST next, so iterator-- will go to head
-            if(removeItemData != 0) removeItemData(pNode->data);
+            if(removeItemData != nullptr) removeItemData(pNode->data);
             delete pNode;
             pNode = pNext;
             pList->count -= 1;
@@ -290,8 +290,8 @@ DLinkedList<T>::DLinkedList(
         bool (*itemEqual)(T&, T&) ) {
     head = new Node();
     tail = new Node();
-    head->next = tail; tail->next = 0;
-    tail->prev = head; head->prev = 0;
+    head->next = tail; tail->next = nullptr;
+    tail->prev = head; head->prev = nullptr;
     count = 0;
     this->itemEqual = itemEqual;
     this->deleteUserData = deleteUserData;
@@ -316,8 +316,8 @@ template<class T>
 DLinkedList<T>::~DLinkedList() {
     removeInternalData();
     
-    if(this->head != 0) delete this->head;
-       if(this->tail != 0) delete this->tail;
+    if(this->head != nullptr) delete this->head;
+    if(this->tail != nullptr) delete this->tail;
 }
 
 template<class T>
@@ -333,7 +333,7 @@ void DLinkedList<T>::add(int index, T e) {
         throw std::out_of_range("The index is out of range!");
     
     //1. Create a new Node containing user's data
-       Node *newNode = new Node(e, NULL, NULL);
+       Node *newNode = new Node(e, nullptr, nullptr);
 
        //2. Search for Node having: index - 1: prevNode and at CurNode
        Node *prevNode = this->head;
@@ -365,7 +365,7 @@ void DLinkedList<T>::add(int index, T e) {
 
 template<class T>
 typename DLinkedList<T>::Node* DLinkedList<T>::getPreviousNodeOf(int index){
-    Node* prevNode=0;
+    Node* prevNode = nullptr;
     int cursor;
     
     int mid = count/2;
@@ -404,8 +404,8 @@ T DLinkedList<T>::removeAt(int index){
         Node *curNode = prevNode->next;
         prevNode->next = curNode->next;
         curNode->next->prev = prevNode;
-        curNode->next = 0;
-        curNode->prev = 0; // detach from list
+        curNode->next = nullptr;
+        curNode->prev = nullptr; // detach from list
 
             T data = curNode->data; // backup user's data
         delete curNode;
@@ -436,9 +436,9 @@ void DLinkedList<T>::clear(){
     
     // put to the empty condition
         head->next = tail;
-        tail->next = 0;
+        tail->next = nullptr;
         tail->prev = head;
-        head->prev = 0;
+        head->prev = nullptr;
         this->count = 0;
 }
 
@@ -489,7 +489,7 @@ bool DLinkedList<T>::removeItem(T item, void (*removeItemData)(T)){
                 pNode->next->prev = pNode->prev;
 
                 //remove data
-                if (removeItemData)
+                if (removeItemData != nullptr)
                     removeItemData(pNode->data);
                 delete pNode;
                 this->count -= 1;
@@ -507,19 +507,19 @@ bool DLinkedList<T>::contains(T item){
 }
 
 template<class T>
-string DLinkedList<T>::toString(string (*item2str)(T&) ){
+std::string DLinkedList<T>::toString(std::string (*item2str)(T&) ){
       if(this->count <= 0) return "[]";
     
-    stringstream itemos;
+    std::stringstream itemos;
     Node* ptr = head->next;
     while(ptr != tail){
-        if(item2str != 0) itemos << item2str(ptr->data) << ", ";
+        if(item2str != nullptr) itemos << item2str(ptr->data) << ", ";
         else itemos << ptr->data << ", ";
 
         ptr = ptr->next;
     }
     //remove the last ", "
-    string itemstr = itemos.str();
+    std::string itemstr = itemos.str();
     itemstr = itemstr.substr(0, itemstr.rfind(','));
     return "[" + itemstr + "]";
 }
@@ -529,8 +529,8 @@ template<class T>
 void DLinkedList<T>::copyFrom(const DLinkedList<T>& list){
     //Initialize this list to the empty condition
     this->count = 0;
-    this->head->next = this->tail; this->tail->next = 0;
-    this->tail->prev = this->head; this->head->prev = 0;
+    this->head->next = this->tail; this->tail->next = nullptr;
+    this->tail->prev = this->head; this->head->prev = nullptr;
 
     //Copy pointers from "list"
     this->deleteUserData = list.deleteUserData;
@@ -547,10 +547,10 @@ void DLinkedList<T>::copyFrom(const DLinkedList<T>& list){
 template<class T>
 void DLinkedList<T>::removeInternalData(){
     //Remove user's data stored in nodes
-    if(deleteUserData != 0) deleteUserData(this);
+    if(deleteUserData != nullptr) deleteUserData(this);
     
     //Remove nodes
-    if((head != 0) & (tail != 0)){
+    if((head != nullptr) && (tail != nullptr)){
         Node* ptr = head->next;
         while(ptr != tail){
             Node* next = ptr->next;

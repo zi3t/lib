@@ -20,24 +20,24 @@ template<class T>
 class XArrayListSE: public XArrayList<T>{
 public:
     XArrayListSE(
-            void (*removeData)(XArrayList<T>*)=0, 
-            bool (*itemEQ)(T&, T&)=0,
-            ISort<T>* sortAlg=0): 
+            void (*removeData)(XArrayList<T>*) = nullptr,
+            bool (*itemEQ)(T&, T&) = nullptr,
+            ISort<T>* sortAlg = nullptr):
                 XArrayList<T>(removeData, itemEQ){
                     
         useDefault = false;            
-        if(sortAlg != 0) this->sortAlg = sortAlg;
+        if(sortAlg != nullptr) this->sortAlg = sortAlg;
         else{
             this->sortAlg = new QuickSort<T>(); //use QuickSort by default
             useDefault = true;
-        } 
+        }
     };
     ~XArrayListSE(){
         if(useDefault) delete this->sortAlg; //DO NOT delete the external sort-algorithm
     }
     
-    void sort(int (*comparator)(T&,T&)=0){
-        sortAlg->sort(this->data, this->count, comparator); 
+    void sort(int (*comparator)(T&,T&) = nullptr){
+        sortAlg->sort(this->data, this->count, comparator);
     }
     
 protected: 

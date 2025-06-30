@@ -17,7 +17,7 @@
 #include "stacknqueue/Queue.h"
 #include <iostream>
 #include <iomanip>
-using namespace std;
+
 
 void queueDemo1(){
     Queue<int> queue;
@@ -27,7 +27,7 @@ void queueDemo1(){
     queue.println();
     
     for(int i=-3; i < 10; i++){
-        cout <<"value " << i <<  " : " << (queue.contains(i) ? "in queue" : "not in queue") << endl;
+        std::cout <<"value " << i <<  " : " << (queue.contains(i) ? "in queue" : "not in queue") << std::endl;
     }
 }
 
@@ -38,14 +38,14 @@ void queueDemo2(){
     
     queue.println();
     
-    cout << queue.contains(Point(23.2f, 25.4f)) << endl;
-    cout << queue.contains(Point(24.6f, 23.1f)) << endl;
-    cout << queue.contains(Point(123.2f, 25.4f)) << endl;
-    cout << queue.contains(Point(124.6f, 23.1f)) << endl;
+    std::cout << queue.contains(Point(23.2f, 25.4f)) << std::endl;
+    std::cout << queue.contains(Point(24.6f, 23.1f)) << std::endl;
+    std::cout << queue.contains(Point(123.2f, 25.4f)) << std::endl;
+    std::cout << queue.contains(Point(124.6f, 23.1f)) << std::endl;
 }
 
-string qPointPtr2Str(Point*& point){
-    stringstream os;
+std::std::string qPointPtr2Str(Point*& point){
+    std::stringstream os;
     os << "("   << point->getX() << ", "
                 << point->getY()
        << ")";
@@ -65,10 +65,10 @@ void queueDemo3(){
     
     queue.println(&qPointPtr2Str);
     
-    cout << queue.contains(new Point(23.2f, 25.4f)) << endl;
-    cout << queue.contains(new Point(24.6f, 23.1f)) << endl;
-    cout << queue.contains(new Point(123.2f, 25.4f)) << endl;
-    cout << queue.contains(new Point(124.6f, 23.1f)) << endl;
+    std::cout << queue.contains(new Point(23.2f, 25.4f)) << std::endl;
+    std::cout << queue.contains(new Point(24.6f, 23.1f)) << std::endl;
+    std::cout << queue.contains(new Point(123.2f, 25.4f)) << std::endl;
+    std::cout << queue.contains(new Point(124.6f, 23.1f)) << std::endl;
     
     delete p1; delete p2; delete p3; delete p4;
 }

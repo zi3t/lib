@@ -14,7 +14,7 @@
 #define TREE_BSTDEMO_H_
 
 #include "tree/BST.h"
-#include <math.h>
+#include <cmath>
 
 
 void bstDemo1(){

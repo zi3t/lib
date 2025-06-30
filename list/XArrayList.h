@@ -13,11 +13,10 @@
 #ifndef LIST_XARRAYLIST_H_
 #define LIST_XARRAYLIST_H_
 #include "list/IList.h"
-#include <memory.h>
+#include <cstring>
 #include <sstream>
 #include <iostream>
 #include <type_traits>
-using namespace std;
 
 template <class T>
 class XArrayList : public IList<T>
@@ -34,8 +33,8 @@ protected:
 
 public:
     XArrayList(
-        void (*deleteUserData)(XArrayList<T> *) = 0,
-        bool (*itemEqual)(T &, T &) = 0);
+        void (*deleteUserData)(XArrayList<T> *) = nullptr,
+        bool (*itemEqual)(T &, T &) = nullptr);
     XArrayList(const XArrayList<T> &list);
     XArrayList<T> &operator=(const XArrayList<T> &list);
     ~XArrayList();
@@ -44,21 +43,21 @@ public:
     void add(T e);
     void add(int index, T e);
     T removeAt(int index);
-    bool removeItem(T item, void (*removeItemData)(T) = 0);
+    bool removeItem(T item, void (*removeItemData)(T) = nullptr);
     bool empty();
     int size();
     void clear();
     T &get(int index);
     int indexOf(T item);
     bool contains(T item);
-    string toString(string (*item2str)(T &) = 0);
+    std::string toString(std::string (*item2str)(T &) = nullptr);
     //Inherit from IList: BEGIN
 
-    void println(string (*item2str)(T &) = 0)
+    void println(std::string (*item2str)(T &) = nullptr)
     {
-        cout << toString(item2str) << endl;
+        std::cout << toString(item2str) << std::endl;
     }
-    void setDeleteUserDataPtr(void (*deleteUserData)(XArrayList<T> *) = 0)
+    void setDeleteUserDataPtr(void (*deleteUserData)(XArrayList<T> *) = nullptr)
     {
         this->deleteUserData = deleteUserData;
     }
@@ -110,7 +109,7 @@ protected:
      */
     static bool equals(T &lhs, T &rhs, bool (*itemEqual)(T &, T &))
     {
-        if (itemEqual == 0)
+        if (itemEqual == nullptr)
             return lhs == rhs;
         else
             return itemEqual(lhs, rhs);
@@ -131,7 +130,7 @@ public:
         XArrayList<T> *pList;
 
     public:
-        Iterator(XArrayList<T> *pList = 0, int index = 0)
+        Iterator(XArrayList<T> *pList = nullptr, int index = 0)
         {
             this->pList = pList;
             this->cursor = index;
@@ -142,10 +141,10 @@ public:
             pList = iterator.pList;
             return *this;
         }
-        void remove(void (*removeItemData)(T) = 0)
+        void remove(void (*removeItemData)(T) = nullptr)
         {
             T item = pList->removeAt(cursor);
-            if (removeItemData != 0)
+            if (removeItemData != nullptr)
                 removeItemData(item);
             cursor -= 1; //MUST keep index of previous, for ++ later
         }
@@ -214,11 +213,11 @@ template <class T>
 void XArrayList<T>::removeInternalData()
 {
     //Remove pointers stored in the dynamic array (i.e., data)
-    if (deleteUserData != 0)
+    if (deleteUserData != nullptr)
         deleteUserData(this);
 
     //Remove the dynamic array
-    if (data != 0)
+    if (data != nullptr)
         delete[] data;
 }
 
@@ -290,7 +289,7 @@ bool XArrayList<T>::removeItem(T item, void (*removeItemData)(T))
         if (found)
         {
             //remove data at data[cursor]
-            if (removeItemData)
+            if (removeItemData != nullptr)
                 removeItemData(this->data[cursor]);
             //shift data
             for (int idx = cursor; idx < count - 1; idx++)
@@ -358,20 +357,20 @@ bool XArrayList<T>::contains(T item)
 }
 
 template <class T>
-string XArrayList<T>::toString(string (*item2str)(T &))
+std::string XArrayList<T>::toString(std::string (*item2str)(T &))
 {
-    stringstream ss;
+    std::stringstream ss;
     ss << "[";
     for (int idx = 0; idx < count - 1; idx++)
     {
-        if (item2str != 0)
+        if (item2str != nullptr)
             ss << item2str(data[idx]) << ", ";
         else
             ss << data[idx] << ", ";
     }
     if (count > 0)
     {
-        if (item2str != 0)
+        if (item2str != nullptr)
             ss << item2str(data[count - 1]);
         else
             ss << data[count - 1];

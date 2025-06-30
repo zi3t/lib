@@ -16,7 +16,7 @@
 #include "util/Point.h"
 #include <iostream>
 #include <iomanip>
-using namespace std;
+
 
 void xlistDemo1(){
     XArrayList<int> iList;
@@ -25,11 +25,11 @@ void xlistDemo1(){
     
     //iList.dump();
     for(XArrayList<int>::Iterator it=iList.begin(); it != iList.end(); it++ )
-        cout << *it << ", found at: " << iList.indexOf(*it) << endl;
-    cout << endl;
+        std::cout << *it << ", found at: " << iList.indexOf(*it) << std::endl;
+    std::cout << std::endl;
     int item = 120;
     int foundIdx = iList.indexOf(item);
-    cout    << "lookup for " << item  << " found at: " << foundIdx << endl;
+    std::cout    << "lookup for " << item  << " found at: " << foundIdx << std::endl;
 }
 
 void xlistDemo2(){
@@ -47,8 +47,8 @@ void xlistDemo3(){
     int idx1 = alist.indexOf(Point(24.6f, 23.1f));
     int idx2 = alist.indexOf(Point(24.61f, 23.1f));
     
-    cout << "result 1 : " << idx1 << endl;
-    cout << "result 2 : " << idx2 << endl;
+    std::cout << "result 1 : " << idx1 << std::endl;
+    std::cout << "result 2 : " << idx2 << std::endl;
 }
 
 void xlistDemo4(){
@@ -58,29 +58,29 @@ void xlistDemo4(){
     list1.add(new Point(12.5f, 22.3f)); 
     
     for(XArrayList<Point*>::Iterator it = list1.begin(); it != list1.end(); it++)
-        cout << **it << endl;
+        std::cout << **it << std::endl;
     
     Point* p1 = new Point(24.6f, 23.1f); //found in list
     Point* p2 = new Point(124.6f, 23.1f); //not found
-    cout << *p1 << "=> " << (list1.contains(p1)? "found; " : "not found; ")
-                << " indexOf returns: " << list1.indexOf(p1) << endl;
-    cout << *p2 << "=> " << (list1.contains(p2)? "found; " : "not found; ")
-                << " indexOf returns: " << list1.indexOf(p2) << endl;
+    std::cout << *p1 << "=> " << (list1.contains(p1)? "found; " : "not found; ")
+                << " indexOf returns: " << list1.indexOf(p1) << std::endl;
+    std::cout << *p2 << "=> " << (list1.contains(p2)? "found; " : "not found; ")
+                << " indexOf returns: " << list1.indexOf(p2) << std::endl;
     
     ///Different results if not pass &Point::equals
-    cout << endl << endl;
+    std::cout << std::endl << std::endl;
     XArrayList<Point*> list2(&XArrayList<Point*>::free);
     list2.add(new Point(23.2f, 25.4f));
     list2.add(new Point(24.6f, 23.1f));  
     list2.add(new Point(12.5f, 22.3f)); 
     
     for(XArrayList<Point*>::Iterator it = list2.begin(); it != list2.end(); it++)
-        cout << **it << endl;
+        std::cout << **it << std::endl;
     
-    cout << *p1 << "=> " << (list2.contains(p1)? "found; " : "not found; ")
-                << " indexOf returns: " << list2.indexOf(p1) << endl;
-    cout << *p2 << "=> " << (list2.contains(p2)? "found; " : "not found; ")
-                << " indexOf returns: " << list2.indexOf(p2) << endl;
+    std::cout << *p1 << "=> " << (list2.contains(p1)? "found; " : "not found; ")
+                << " indexOf returns: " << list2.indexOf(p1) << std::endl;
+    std::cout << *p2 << "=> " << (list2.contains(p2)? "found; " : "not found; ")
+                << " indexOf returns: " << list2.indexOf(p2) << std::endl;
     
     delete p1; delete p2;
 }

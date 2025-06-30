@@ -16,15 +16,14 @@
 #include "geom/Vector3D.h"
 #include <iostream>
 #include <iomanip>
-#include <math.h>
+#include <cmath>
 #include <random>
 #include <sstream>
-using namespace std;
 
 #define EPSILON (1E-8)
 class Point3D {
 public:
-    friend ostream &operator<<( ostream &os, const Point3D& point);
+    friend std::ostream &operator<<( std::ostream &os, const Point3D& point);
     
     Point3D(float x=0.0f, float y=0.0f, float z=0.0f);
     Point3D(const Point3D& point);
@@ -51,8 +50,8 @@ public:
     //static section  
     static bool equals(Point3D& lhs, Point3D& rhs); //with pointer to point
     static bool equals(Point3D*& lhs, Point3D*& rhs); //with pointer to point
-    static string toString(Point3D& point);
-    static string toString(Point3D*& point);
+    static std::string toString(Point3D& point);
+    static std::string toString(Point3D*& point);
     
     
     // The the two following: generate and print an array of Point3D

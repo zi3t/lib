@@ -29,12 +29,12 @@ public:
     void sort(int (*comparator)(T&,T&)=0){
         if(this->count > 0){
             typename SLinkedList<T>::Node* first = this->head->next; //first user's data
-            this->tail->next->next = 0; //to tail => to 0
+            this->tail->next->next = nullptr; //to tail => to nullptr
             mergeSort(first, comparator);
             
             //find the last user's data
             typename SLinkedList<T>::Node* last = first;
-            while(last->next != 0) last = last->next;
+            while(last->next != nullptr) last = last->next;
             
             //attach to head&tail of the list
             last->next = this->tail;
@@ -44,16 +44,16 @@ public:
     };
     
 protected:
-    static int compare(T& lhs, T& rhs, int (*comparator)(T&,T&)=0){
-        if(comparator != 0) return comparator(lhs, rhs);
+    static int compare(T& lhs, T& rhs, int (*comparator)(T&,T&) = nullptr){
+        if(comparator != nullptr) return comparator(lhs, rhs);
         else{
             if(lhs < rhs) return -1;
             else if(lhs > rhs) return +1;
             else return 0;
         }
     }
-    void mergeSort(typename SLinkedList<T>::Node*& head, int (*comparator)(T&,T&)=0){
-        if((head != 0) && (head->next != 0)){
+    void mergeSort(typename SLinkedList<T>::Node*& head, int (*comparator)(T&,T&) = nullptr){
+        if((head != nullptr) && (head->next != nullptr)){
             typename SLinkedList<T>::Node* second;
             devide(head, second);
             mergeSort(head, comparator);
@@ -64,10 +64,10 @@ protected:
     void devide(typename SLinkedList<T>::Node*& first, typename SLinkedList<T>::Node*& second){
          typename SLinkedList<T>::Node *midpoint = first;
         typename SLinkedList<T>::Node *last = first->next;
-        while (last != 0)
+        while (last != nullptr)
         {
             last = last->next;
-            if (last != 0)
+            if (last != nullptr)
             {
                 last = last->next;
                 midpoint = midpoint->next;
@@ -79,7 +79,7 @@ protected:
     void merge(typename SLinkedList<T>::Node*& first, typename SLinkedList<T>::Node*& second, int (*comparator)(T&,T&)=0){
         typename SLinkedList<T>::Node combined;
         typename SLinkedList<T>::Node *lastSorted = &combined;
-        while ((first != 0) && (second != 0))
+        while ((first != nullptr) && (second != nullptr))
         {
             if (compare(first->data, second->data, comparator) <= 0)
             {
@@ -94,10 +94,10 @@ protected:
                 second = second->next;
             }
         }
-        if (first == 0)
+        if (first == nullptr)
         {
             lastSorted->next = second;
-            second = 0;
+            second = nullptr;
         }
         else
             lastSorted->next = first;

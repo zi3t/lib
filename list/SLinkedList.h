@@ -18,7 +18,6 @@
 #include <sstream>
 #include <iostream>
 #include <type_traits>
-using namespace std;
 
 template <class T> class SLinkedList;
 
@@ -37,8 +36,8 @@ protected:
     
 public:
     SLinkedList(
-            void (*deleteUserData)(SLinkedList<T>*)=0, 
-            bool (*itemEqual)(T&, T&)=0);
+            void (*deleteUserData)(SLinkedList<T>*)=nullptr, 
+            bool (*itemEqual)(T&, T&)=nullptr);
     SLinkedList(const SLinkedList<T>& list);
     SLinkedList<T>& operator=(const SLinkedList<T>& list);
     ~SLinkedList();
@@ -47,21 +46,21 @@ public:
     void    add(T e);
     void    add(int index, T e);
     T       removeAt(int index);
-    bool    removeItem(T item, void (*removeItemData)(T)=0);
+    bool    removeItem(T item, void (*removeItemData)(T)=nullptr);
     bool    empty();
     int      size();
     void    clear();
     T&      get(int index);
     int      indexOf(T item);
     bool    contains(T item);
-    string  toString(string (*item2str)(T&)=0 );
+    std::string  toString(std::string (*item2str)(T&)=nullptr );
     //Inherit from IList: BEGIN
     
     
-    void println(string (*item2str)(T&)=0 ){
-        cout << toString(item2str) << endl;
+    void println(std::string (*item2str)(T&)=nullptr ){
+        std::cout << toString(item2str) << std::endl;
     }
-    void setDeleteUserDataPtr(void (*deleteUserData)(SLinkedList<T>*) = 0){
+    void setDeleteUserDataPtr(void (*deleteUserData)(SLinkedList<T>*) = nullptr){
         this->deleteUserData = deleteUserData;
     }
 
@@ -83,7 +82,7 @@ public:
 
 protected:
     static bool equals(T& lhs, T& rhs, bool (*itemEqual)(T&, T& )){
-        if(itemEqual == 0) return lhs == rhs;
+        if(itemEqual == nullptr) return lhs == rhs;
         else return itemEqual(lhs, rhs);
     }
     
@@ -99,10 +98,10 @@ public:
         T data;
         Node *next;
     public:
-        Node(Node *next=0){
+        Node(Node *next=nullptr){
             this->next = next;
         }
-        Node(T data, Node *next=0){
+        Node(T data, Node *next=nullptr){
             this->data = data;
             this->next = next;
         }
@@ -116,14 +115,14 @@ public:
         Node* pNode;
         
     public:
-        Iterator(SLinkedList<T>* pList=0, bool begin=true){
+        Iterator(SLinkedList<T>* pList=nullptr, bool begin=true){
             if(begin){
-                if(pList !=0) this->pNode = pList->head->next;
-                else pNode = 0;
+                if(pList !=nullptr) this->pNode = pList->head->next;
+                else pNode = nullptr;
             }
             else{
-                if(pList !=0) this->pNode = pList->tail;
-                else pNode = 0;
+                if(pList !=nullptr) this->pNode = pList->tail;
+                else pNode = nullptr;
             }
             this->pList = pList;
         }
@@ -138,7 +137,7 @@ public:
          * while-loop can have n iterations
          * => Use DLinkedList when need a linked-list
          */
-        void remove(void (*removeItemData)(T)=0){
+        void remove(void (*removeItemData)(T)=nullptr){
             Node* pCur = this->pList->head->next;
             Node* pPrev = this->pList->head;
             bool found = false;
@@ -149,10 +148,10 @@ public:
                     pPrev->next = pCur->next;
                     if(pList->tail->next == pCur) pList->tail->next = pPrev; //update tail if needed
                     pList->count -= 1; //dec count in list
-                    pCur->next = 0;
+                    pCur->next = nullptr;
 
                     //remove users data + node :
-                    if(removeItemData != 0) removeItemData(pCur->data);
+                    if(removeItemData != nullptr) removeItemData(pCur->data);
                     delete pCur; 
                     
                     //prepare for next iteration, usually: it++
@@ -228,10 +227,10 @@ void SLinkedList<T>::copyFrom(const SLinkedList<T>& list){
 template<class T>
 void SLinkedList<T>::removeInternalData(){
     //Remove user's data of this list
-    if(deleteUserData != 0) deleteUserData(this);
+    if(deleteUserData != nullptr) deleteUserData(this);
     
     //Remove this list's data (i.e. Node)
-    if((head != 0) & (tail != 0)){
+    if((head != nullptr) & (tail != nullptr)){
         Node* ptr = head->next;
         while(ptr != tail){
             Node* next = ptr->next;
@@ -261,8 +260,8 @@ template<class T>
 SLinkedList<T>::~SLinkedList() {
     removeInternalData(); 
     
-    if(head != 0) delete head;
-    if(tail != 0) delete tail;
+    if(head != nullptr) delete head;
+    if(tail != nullptr) delete tail;
 }
 
 template<class T>
@@ -277,7 +276,7 @@ void SLinkedList<T>::add(int index, T e) {
     if((index < 0) || (index > count))
         throw std::out_of_range("The index is out of range!");
     //index in [0, count]
-    Node* newNode = new Node(e, 0);
+    Node* newNode = new Node(e, nullptr);
     Node* prevNode = head;
     int cursor = -1;
     while(cursor < index -1){
@@ -307,7 +306,7 @@ T SLinkedList<T>::removeAt(int index){
     }
     Node* curNode = prevNode->next;
     prevNode->next = curNode->next;
-    curNode->next = 0;//delete the link between node curr and next  node
+    curNode->next = nullptr;//delete the link between node curr and next  node
     if(index == count){
         tail->next = prevNode;
     }
@@ -326,10 +325,10 @@ bool SLinkedList<T>::removeItem(T item, void (*removeItemData)(T)){
             pPrev->next = pNode->next;
             if(pNode->next == tail)
                 tail->next = pPrev;
-            pNode->next = 0;
+            pNode->next = nullptr;
 
             //remove data
-            if(removeItemData) removeItemData(pNode->data);
+            if(removeItemData != nullptr) removeItemData(pNode->data);
             delete pNode;
             this->count -=1;
             return true;
@@ -395,19 +394,19 @@ bool SLinkedList<T>::contains(T item){
 }
 
 template<class T>
-string SLinkedList<T>::toString(string (*item2str)(T&) ){
+std::string SLinkedList<T>::toString(std::string (*item2str)(T&) ){
      if(this->count <= 0) return "[]";
     
-    stringstream itemos;
+    std::stringstream itemos;
     Node* ptr = head->next;
     while(ptr != tail){
-        if(item2str != 0) itemos << item2str(ptr->data) << ", ";
+        if(item2str != nullptr) itemos << item2str(ptr->data) << ", ";
         else itemos << ptr->data << ", ";
 
         ptr = ptr->next;
     }
     //remove the last ", "
-    string itemstr = itemos.str();
+    std::string itemstr = itemos.str();
     itemstr = itemstr.substr(0, itemstr.rfind(','));
     return "[" + itemstr + "]";
 }

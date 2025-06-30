@@ -16,18 +16,17 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-using namespace std;
 
 
 class VertexNotFoundException: public std::exception{
 private:
-    string vertex;
+    std::string vertex;
 public:
-    VertexNotFoundException(string vertex){
+    VertexNotFoundException(std::string vertex){
         this->vertex = vertex;
     }
     const char * what () const throw (){
-        stringstream os;
+        std::stringstream os;
         os << "Vertex (" << this->vertex << "): is not found";
         return os.str().c_str();
     }
@@ -35,13 +34,13 @@ public:
 
 class EdgeNotFoundException: public std::exception{
 private:
-    string edge;
+    std::string edge;
 public:
-    EdgeNotFoundException(string edge){
+    EdgeNotFoundException(std::string edge){
         this->edge = edge;
     }
     const char * what () const throw (){
-        stringstream os;
+        std::stringstream os;
         os << "Edge (" << edge << "): is not found";
         return os.str().c_str();
     }
@@ -76,7 +75,7 @@ public:
     virtual DLinkedList<T> vertices()=0;
     virtual bool connected(T from, T to)=0;
     
-    virtual string toString()=0;
+    virtual std::string toString()=0;
 };
 
 /*
@@ -109,8 +108,8 @@ public:
     void add(T item){
         this->path.add(item);
     }
-    string toString(string (*item2str)(T&)=0){
-        stringstream os;
+    std::string toString(std::string (*item2str)(T&)=0){
+        std::stringstream os;
         os << this->path.toString(item2str)
                 << ", cost: " << this->cost;
         return os.str();
