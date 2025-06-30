@@ -6,13 +6,12 @@
 
 /* 
  * File:   TopoSorterTest.h
- * Author: ltsach
  *
  * Created on July 11, 2021, 11:03 PM
  */
 
-#ifndef TOPOSORTERTEST_H
-#define TOPOSORTERTEST_H
+#ifndef TEST_TOPOSORTERTEST_H_
+#define TEST_TOPOSORTERTEST_H_
 
 #include "doctest.h"
 #include "graph/DGraphModel.h"

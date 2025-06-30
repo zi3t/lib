@@ -6,17 +6,16 @@
 
 /* 
  * File:   StraightInsertionSortDemo.h
- * Author: LTSACH
  *
  * Created on 23 August 2020, 16:26
  */
 
-#ifndef STRAIGHTINSERTIONSORTDEMO_H
-#define STRAIGHTINSERTIONSORTDEMO_H
+#ifndef SORTING_STRAIGHTINSERTIONSORTDEMO_H_
+#define SORTING_STRAIGHTINSERTIONSORTDEMO_H_
 
+#include "sorting/StraightInsertionSort.h"
 #include <iostream>
 #include <iomanip>
-#include "sorting/StraightInsertionSort.h"
 using namespace std;
 
 void straightSDemo1(){

@@ -6,18 +6,16 @@
 
 /* 
  * File:   Stack.h
- * Author: LTSACH
  *
  * Created on 19 August 2020, 22:01
  */
 
-#ifndef STACK_H
-#define STACK_H
-
-#include <list>
+#ifndef STACKNQUEUE_STACK_H_
+#define STACKNQUEUE_STACK_H_
 
 #include "list/DLinkedList.h"
 #include "stacknqueue/IDeck.h"
+#include <list>
 
 template<class T>
 class Stack: public IDeck<T>{

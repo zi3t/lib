@@ -6,18 +6,17 @@
 
 /* 
  * File:   SLinkedListDemo.h
- * Author: LTSACH
  *
  * Created on 19 August 2020, 21:16
  */
 
-#ifndef SLINKEDLISTDEMO_H
-#define SLINKEDLISTDEMO_H
+#ifndef LIST_SLINKEDLISTDEMO_H_
+#define LIST_SLINKEDLISTDEMO_H_
 
-#include <iostream>
-#include <iomanip>
 #include "SLinkedList.h"
 #include "util/Point.h"
+#include <iostream>
+#include <iomanip>
 using namespace std;
 
 void slistDemo1(){

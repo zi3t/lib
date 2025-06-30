@@ -6,18 +6,17 @@
 
 /* 
  * File:   BubbleSortDemo.h
- * Author: LTSACH
  *
  * Created on 23 August 2020, 17:16
  */
 
-#ifndef BUBBLESORTDEMO_H
-#define BUBBLESORTDEMO_H
+#ifndef SORTING_BUBBLESORTDEMO_H_
+#define SORTING_BUBBLESORTDEMO_H_
 
 
+#include "sorting/BubbleSort.h"
 #include <iostream>
 #include <iomanip>
-#include "sorting/BubbleSort.h"
 using namespace std;
 
 void BuubleSortDemo1(){

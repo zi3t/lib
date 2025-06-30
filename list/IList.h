@@ -6,14 +6,13 @@
 
 /* 
  * File:   IList.h
- * Author: LTSACH
  *
  * Created on 13 August 2020, 13:54
  */
 
 
-#ifndef ILIST_H
-#define ILIST_H
+#ifndef LIST_ILIST_H_
+#define LIST_ILIST_H_
 #include <string>
 using namespace std;
 

@@ -6,18 +6,17 @@
 
 /* 
  * File:   ShellSortDemo.h
- * Author: LTSACH
  *
  * Created on 23 August 2020, 16:45
  */
 
-#ifndef SHELLSORTDEMO_H
-#define SHELLSORTDEMO_H
+#ifndef SORTING_SHELLSORTDEMO_H_
+#define SORTING_SHELLSORTDEMO_H_
 
 
+#include "sorting/ShellSort.h"
 #include <iostream>
 #include <iomanip>
-#include "sorting/ShellSort.h"
 using namespace std;
 
 

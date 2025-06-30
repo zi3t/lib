@@ -6,13 +6,12 @@
 
 /* 
  * File:   ListSort.h
- * Author: LTSACH
  *
  * Created on 12 September 2020, 09:56
  */
 
-#ifndef LISTSORT_H
-#define LISTSORT_H
+#ifndef SORTING_LISTSORTDEMO_H_
+#define SORTING_LISTSORTDEMO_H_
 
 #include "sorting/DLinkedListSE.h"
 #include "sorting/SLinkedListSE.h"

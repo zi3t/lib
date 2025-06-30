@@ -1,5 +1,5 @@
-#ifndef QUEUE_H
-#define QUEUE_H
+#ifndef STACKNQUEUE_QUEUE_H_
+#define STACKNQUEUE_QUEUE_H_
 
 #include "list/DLinkedList.h"
 #include "stacknqueue/IDeck.h"

@@ -6,21 +6,19 @@
 
 /* 
  * File:   XHapMap.h
- * Author: LTSACH
  *
  * Created on 22 August 2020, 21:57
  */
 
-#ifndef XHASHMAP_H
-#define XHASHMAP_H
+#ifndef HASH_XHASHMAP_H_
+#define HASH_XHASHMAP_H_
+#include "hash/IMap.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
 #include <sstream>
 #include <memory.h>
 using namespace std;
-
-#include "hash/IMap.h"
 template <class K, class V>
 class Pair
 {

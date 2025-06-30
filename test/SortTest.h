@@ -6,13 +6,12 @@
 
 /* 
  * File:   SortTest.h
- * Author: LTSACH
  *
  * Created on 27 August 2020, 13:03
  */
 
-#ifndef SORTTEST_H
-#define SORTTEST_H
+#ifndef TEST_SORTTEST_H_
+#define TEST_SORTTEST_H_
 
 
 

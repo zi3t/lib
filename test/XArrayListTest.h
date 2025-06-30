@@ -6,13 +6,12 @@
 
 /* 
  * File:   XArrayListTest.h
- * Author: LTSACH
  *
  * Created on 27 August 2020, 05:38
  */
 
-#ifndef XARRAYLISTTEST_H
-#define XARRAYLISTTEST_H
+#ifndef TEST_XARRAYLISTTEST_H_
+#define TEST_XARRAYLISTTEST_H_
 
 #include "doctest.h"
 #include "list/XArrayList.h"

@@ -6,13 +6,12 @@
 
 /* 
  * File:   FuncLib.h
- * Author: ltsach
  *
  * Created on June 29, 2021, 9:27 AM
  */
 
-#ifndef FUNCLIB_H
-#define FUNCLIB_H
+#ifndef UTIL_FUNCLIB_H_
+#define UTIL_FUNCLIB_H_
 
 #include <iostream>
 #include <iomanip>

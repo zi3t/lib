@@ -6,13 +6,12 @@
 
 /* 
  * File:   IHeap.h
- * Author: LTSACH
  *
  * Created on 22 August 2020, 07:54
  */
 
-#ifndef IHEAP_H
-#define IHEAP_H
+#ifndef HEAP_IHEAP_H_
+#define HEAP_IHEAP_H_
 #include <string>
 using namespace std;
 

@@ -6,13 +6,12 @@
 
 /* 
  * File:   XArrayListSE.h
- * Author: LTSACH
  *
  * Created on 31 August 2020, 16:01
  */
 
-#ifndef XARRAYLISTSE_H
-#define XARRAYLISTSE_H
+#ifndef SORTING_XARRAYLISTSE_H_
+#define SORTING_XARRAYLISTSE_H_
 
 #include "list/XArrayList.h"
 #include "sorting/QuickSort.h"

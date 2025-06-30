@@ -6,18 +6,17 @@
 
 /* 
  * File:   QueueDemo.h
- * Author: LTSACH
  *
  * Created on 10 September 2020, 16:51
  */
 
-#ifndef QUEUEDEMO_H
-#define QUEUEDEMO_H
+#ifndef STACKNQUEUE_QUEUEDEMO_H_
+#define STACKNQUEUE_QUEUEDEMO_H_
 
-#include <iostream>
-#include <iomanip>
 #include "util/Point.h"
 #include "stacknqueue/Queue.h"
+#include <iostream>
+#include <iomanip>
 using namespace std;
 
 void queueDemo1(){

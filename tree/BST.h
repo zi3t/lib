@@ -6,20 +6,18 @@
 
 /* 
  * File:   BST.h
- * Author: LTSACH
  *
  * Created on 20 August 2020, 15:31
  */
 
-#ifndef BST_H
-#define BST_H
-#include <string>
-#include <sstream>
-
+#ifndef TREE_BST_H_
+#define TREE_BST_H_
 #include "tree/IBST.h"
 #include "tree/ITreeWalker.h"
 #include "stacknqueue/Stack.h"
 #include "stacknqueue/Queue.h"
+#include <string>
+#include <sstream>
 
 /*IMPOTANT: 
  *  >> Can change nEMPTY to another value

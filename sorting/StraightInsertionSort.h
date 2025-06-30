@@ -6,13 +6,12 @@
 
 /* 
  * File:   StraightInsertionSort.h
- * Author: LTSACH
  *
  * Created on 23 August 2020, 16:24
  */
 
-#ifndef STRAIGHTINSERTIONSORT_H
-#define STRAIGHTINSERTIONSORT_H
+#ifndef SORTING_STRAIGHTINSERTIONSORT_H_
+#define SORTING_STRAIGHTINSERTIONSORT_H_
 #include "sorting/ISort.h"
 
 template<class T>

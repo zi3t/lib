@@ -6,13 +6,12 @@
 
 /* 
  * File:   StackTest.h
- * Author: LTSACH
  *
  * Created on 27 August 2020, 10:00
  */
 
-#ifndef STACKTEST_H
-#define STACKTEST_H
+#ifndef TEST_STACKTEST_H_
+#define TEST_STACKTEST_H_
 #include "doctest.h"
 
 #include "stacknqueue/Stack.h"

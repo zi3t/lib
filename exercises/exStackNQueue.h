@@ -6,7 +6,6 @@
 
 /* 
  * File:   StackNQueue.h
- * Author: LTSACH
  *
  * Created on 1 September 2020, 15:34
  */
@@ -14,16 +13,15 @@
  * References:
  * [1] https://www.cs.princeton.edu/courses/archive/spr01/cs126/exercises/adt.html
  */
-#ifndef STACKNQUEUE_H
-#define STACKNQUEUE_H
+#ifndef EXERCISES_EXSTACKNQUEUE_H_
+#define EXERCISES_EXSTACKNQUEUE_H_
 
+#include "stacknqueue/Stack.h"
+#include "stacknqueue/Queue.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
 #include <sstream>
-
-#include "stacknqueue/Stack.h"
-#include "stacknqueue/Queue.h"
 using namespace std;
 
 

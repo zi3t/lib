@@ -6,13 +6,12 @@
 
 /* 
  * File:   XHashMapDemo.h
- * Author: LTSACH
  *
  * Created on 23 August 2020, 10:56
  */
 
-#ifndef XHASHMAPDEMO_H
-#define XHASHMAPDEMO_H
+#ifndef HASH_XHASHMAPDEMO_H_
+#define HASH_XHASHMAPDEMO_H_
 #include "hash/XHashMap.h"
 #include "util/Point.h"
 #include "util/ArrayLib.h"

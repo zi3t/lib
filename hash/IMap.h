@@ -6,13 +6,12 @@
 
 /* 
  * File:   IMap.h
- * Author: LTSACH
  *
  * Created on 22 August 2020, 21:53
  */
 
-#ifndef IMAP_H
-#define IMAP_H
+#ifndef HASH_IMAP_H_
+#define HASH_IMAP_H_
 
 #include "list/DLinkedList.h"
 #include <string>

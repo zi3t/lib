@@ -6,13 +6,12 @@
 
 /* 
  * File:   SLinkedListSETest.h
- * Author: LTSACH
  *
  * Created on 31 August 2020, 21:10
  */
 
-#ifndef SLINKEDLISTSETEST_H
-#define SLINKEDLISTSETEST_H
+#ifndef TEST_SLINKEDLISTSETEST_H_
+#define TEST_SLINKEDLISTSETEST_H_
 
 #include "doctest.h"
 #include "sorting/SLinkedListSE.h"

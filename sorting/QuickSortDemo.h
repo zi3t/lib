@@ -6,19 +6,18 @@
 
 /* 
  * File:   QuickSortDemo.h
- * Author: LTSACH
  *
  * Created on 14 September 2020, 18:27
  */
 
-#ifndef QUICKSORTDEMO_H
-#define QUICKSORTDEMO_H
+#ifndef SORTING_QUICKSORTDEMO_H_
+#define SORTING_QUICKSORTDEMO_H_
 
 
 
+#include "sorting/QuickSort.h"
 #include <iostream>
 #include <iomanip>
-#include "sorting/QuickSort.h"
 using namespace std;
 
 void QuickSortDemo1(){

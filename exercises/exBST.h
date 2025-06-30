@@ -6,23 +6,21 @@
 
 /* 
  * File:   exBST.h
- * Author: LTSACH
  *
  * Created on 1 September 2020, 16:42
  */
 
-#ifndef EXBST_H
-#define EXBST_H
+#ifndef EXERCISES_EXBST_H_
+#define EXERCISES_EXBST_H_
 
+#include "tree/BST.h"
+#include "list/XArrayList.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
 #include <sstream>
 
 using namespace std;
-
-#include "tree/BST.h"
-#include "list/XArrayList.h"
 
 struct Node{
     int key;

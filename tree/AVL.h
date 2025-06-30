@@ -6,13 +6,12 @@
 
 /* 
  * File:   AVL.h
- * Author: LTSACH
  *
  * Created on 12 September 2020, 17:11
  */
 
-#ifndef AVL_H
-#define AVL_H
+#ifndef TREE_AVL_H_
+#define TREE_AVL_H_
 #include "tree/BST.h"
 #include "list/DLinkedList.h"
 #include "stacknqueue/Queue.h"

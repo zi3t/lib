@@ -6,13 +6,12 @@
 
 /* 
  * File:   QueueTest.h
- * Author: LTSACH
  *
  * Created on 27 August 2020, 11:18
  */
 
-#ifndef QUEUETEST_H
-#define QUEUETEST_H
+#ifndef TEST_QUEUETEST_H_
+#define TEST_QUEUETEST_H_
 
 #include "doctest.h"
 

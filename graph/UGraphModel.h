@@ -6,13 +6,12 @@
 
 /* 
  * File:   UGraphModel.h
- * Author: LTSACH
  *
  * Created on 24 August 2020, 15:16
  */
 
-#ifndef UGRAPHMODEL_H
-#define UGRAPHMODEL_H
+#ifndef GRAPH_UGRAPHMODEL_H_
+#define GRAPH_UGRAPHMODEL_H_
 
 #include "graph/AbstractGraph.h"
 #include "stacknqueue/PriorityQueue.h"

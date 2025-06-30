@@ -6,13 +6,12 @@
 
 /* 
  * File:   ShellSort.h
- * Author: LTSACH
  *
  * Created on 23 August 2020, 16:45
  */
 
-#ifndef SHELLSORT_H
-#define SHELLSORT_H
+#ifndef SORTING_SHELLSORT_H_
+#define SORTING_SHELLSORT_H_
 #include "sorting/ISort.h"
 
 template<class T>

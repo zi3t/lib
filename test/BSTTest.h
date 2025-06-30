@@ -6,13 +6,12 @@
 
 /* 
  * File:   BSTTest.h
- * Author: LTSACH
  *
  * Created on 25 August 2020, 16:54
  */
 
-#ifndef BSTTEST_H
-#define BSTTEST_H
+#ifndef TEST_BSTTEST_H_
+#define TEST_BSTTEST_H_
 
 #include "doctest.h"
 #include "tree/BST.h"

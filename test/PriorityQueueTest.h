@@ -6,13 +6,12 @@
 
 /* 
  * File:   PriorityQueueTest.h
- * Author: LTSACH
  *
  * Created on 27 August 2020, 12:33
  */
 
-#ifndef PRIORITYQUEUETEST_H
-#define PRIORITYQUEUETEST_H
+#ifndef TEST_PRIORITYQUEUETEST_H_
+#define TEST_PRIORITYQUEUETEST_H_
 
 
 #include "doctest.h"

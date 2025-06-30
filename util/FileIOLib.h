@@ -6,13 +6,12 @@
 
 /* 
  * File:   FileIOLib.h
- * Author: ltsach
  *
  * Created on July 1, 2021, 8:05 AM
  */
 
-#ifndef FILEIOLIB_H
-#define FILEIOLIB_H
+#ifndef UTIL_FILEIOLIB_H_
+#define UTIL_FILEIOLIB_H_
 
 #include <iostream>
 #include <iomanip>

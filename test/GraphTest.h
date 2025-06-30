@@ -6,13 +6,12 @@
 
 /* 
  * File:   GraphTest.h
- * Author: LTSACH
  *
  * Created on 27 August 2020, 13:43
  */
 
-#ifndef GRAPHTEST_H
-#define GRAPHTEST_H
+#ifndef TEST_GRAPHTEST_H_
+#define TEST_GRAPHTEST_H_
 #include "doctest.h"
 #include "graph/DGraphModel.h"
 #include "graph/UGraphModel.h"

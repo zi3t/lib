@@ -6,17 +6,16 @@
 
 /* 
  * File:   XArrayListDemo.h
- * Author: LTSACH
  *
  * Created on 19 August 2020, 21:05
  */
 
-#ifndef XARRAYLISTDEMO_H
-#define XARRAYLISTDEMO_H
-#include <iostream>
-#include <iomanip>
+#ifndef LIST_XARRAYLISTDEMO_H_
+#define LIST_XARRAYLISTDEMO_H_
 #include "list/XArrayList.h"
 #include "util/Point.h"
+#include <iostream>
+#include <iomanip>
 using namespace std;
 
 void xlistDemo1(){

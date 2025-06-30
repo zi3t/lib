@@ -6,13 +6,12 @@
 
 /* 
  * File:   PriorityQueue.h
- * Author: LTSACH
  *
  * Created on 24 August 2020, 10:06
  */
 
-#ifndef PRIORITYQUEUE_H
-#define PRIORITYQUEUE_H
+#ifndef STACKNQUEUE_PRIORITYQUEUE_H_
+#define STACKNQUEUE_PRIORITYQUEUE_H_
 #include "heap/Heap.h"
 
 template<class T>

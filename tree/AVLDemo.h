@@ -6,20 +6,19 @@
 
 /* 
  * File:   AVLTreeDemo.h
- * Author: LTSACH
  *
  * Created on 12 September 2020, 20:49
  */
 
-#ifndef AVLTREEDEMO_H
-#define AVLTREEDEMO_H
+#ifndef TREE_AVLDEMO_H_
+#define TREE_AVLDEMO_H_
 
+#include "tree/AVL.h"
+#include "util/sampleFunc.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
 #include <sstream>
-#include "tree/AVL.h"
-#include "util/sampleFunc.h"
 using namespace std;
 
 

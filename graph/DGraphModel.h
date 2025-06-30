@@ -6,13 +6,12 @@
 
 /* 
  * File:   DGraphModel.h
- * Author: LTSACH
  *
  * Created on 23 August 2020, 19:36
  */
 
-#ifndef DGRAPHMODEL_H
-#define DGRAPHMODEL_H
+#ifndef GRAPH_DGRAPHMODEL_H_
+#define GRAPH_DGRAPHMODEL_H_
 #include "graph/AbstractGraph.h"
 #include "stacknqueue/Queue.h"
 #include "stacknqueue/Stack.h"

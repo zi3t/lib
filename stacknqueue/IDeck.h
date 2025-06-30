@@ -6,13 +6,12 @@
 
 /* 
  * File:   IDeck.h
- * Author: LTSACH
  *
  * Created on 27 August 2020, 10:32
  */
 
-#ifndef IDECK_H
-#define IDECK_H
+#ifndef STACKNQUEUE_IDECK_H_
+#define STACKNQUEUE_IDECK_H_
 
 class Underflow: public std::exception{
 private:
