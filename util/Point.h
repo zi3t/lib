@@ -6,13 +6,12 @@
 
 /* 
  * File:   Point.h
- * Author: LTSACH
  *
  * Created on 19 August 2020, 21:03
  */
 
-#ifndef POINT_H
-#define POINT_H
+#ifndef UTIL_POINT_H_
+#define UTIL_POINT_H_
 
 #include <iostream>
 #include <iomanip>

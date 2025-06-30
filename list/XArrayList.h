@@ -6,13 +6,12 @@
 
 /* 
  * File:   XArrayList.h
- * Author: LTSACH
  *
  * Created on 13 August 2020, 14:09
  */
 
-#ifndef XARRAYLIST_H
-#define XARRAYLIST_H
+#ifndef LIST_XARRAYLIST_H_
+#define LIST_XARRAYLIST_H_
 #include "list/IList.h"
 #include <memory.h>
 #include <sstream>

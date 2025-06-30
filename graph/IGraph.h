@@ -6,19 +6,17 @@
 
 /* 
  * File:   IGraph.h
- * Author: LTSACH
  *
  * Created on 23 August 2020, 17:28
  */
 
-#ifndef IGRAPH_H
-#define IGRAPH_H
+#ifndef GRAPH_IGRAPH_H_
+#define GRAPH_IGRAPH_H_
+#include "list/DLinkedList.h"
 #include <iostream>
 #include <string>
 #include <sstream>
 using namespace std;
-
-#include "list/DLinkedList.h"
 
 
 class VertexNotFoundException: public std::exception{

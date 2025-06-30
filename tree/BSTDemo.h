@@ -6,13 +6,12 @@
 
 /* 
  * File:   BSTDemo.h
- * Author: LTSACH
  *
  * Created on 20 August 2020, 15:34
  */
 
-#ifndef BSTDEMO_H
-#define BSTDEMO_H
+#ifndef TREE_BSTDEMO_H_
+#define TREE_BSTDEMO_H_
 
 #include "tree/BST.h"
 #include <math.h>

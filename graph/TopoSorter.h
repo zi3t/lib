@@ -6,13 +6,12 @@
 
 /* 
  * File:   TopoSorter.h
- * Author: ltsach
  *
  * Created on July 11, 2021, 10:21 PM
  */
 
-#ifndef TOPOSORTER_H
-#define TOPOSORTER_H
+#ifndef GRAPH_TOPOSORTER_H_
+#define GRAPH_TOPOSORTER_H_
 #include "graph/DGraphModel.h"
 #include "list/DLinkedList.h"
 #include "sorting/DLinkedListSE.h"
@@ -160,7 +159,6 @@ int TopoSorter<T>::BFS = 1;
 
 // /* 
 //  * File:   TopoSorter.h
-//  * Author: ltsach
 //  *
 //  * Created on July 11, 2021, 10:21 PM
 //  */

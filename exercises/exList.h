@@ -6,19 +6,17 @@
 
 /* 
  * File:   exList.h
- * Author: LTSACH
  *
  * Created on 1 September 2020, 18:14
  */
 
-#ifndef EXLIST_H
-#define EXLIST_H
+#ifndef EXERCISES_EXLIST_H_
+#define EXERCISES_EXLIST_H_
+#include "list/XArrayList.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
 using namespace std;
-
-#include "list/XArrayList.h"
 
 void listSimpleDemo(){
     int item[] = {19, 34, 22, 4, 8, 32, 78, 89};

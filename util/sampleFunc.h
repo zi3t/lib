@@ -6,13 +6,12 @@
 
 /* 
  * File:   sampleFunc.h
- * Author: LTSACH
  *
  * Created on 10 September 2020, 20:38
  */
 
-#ifndef SAMPLEFUNC_H
-#define SAMPLEFUNC_H
+#ifndef UTIL_SAMPLEFUNC_H_
+#define UTIL_SAMPLEFUNC_H_
 #include <iostream>
 #include <iomanip>
 #include <string>

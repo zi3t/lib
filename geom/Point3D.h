@@ -6,14 +6,14 @@
 
 /* 
  * File:   Point3D.h
- * Author: LTSACH
  *
  * Created on 8 June 2021, 18:42
  */
 
-#ifndef POINT3D_H
-#define POINT3D_H
+#ifndef GEOM_POINT3D_H_
+#define GEOM_POINT3D_H_
 
+#include "geom/Vector3D.h"
 #include <iostream>
 #include <iomanip>
 #include <math.h>
@@ -22,8 +22,6 @@
 using namespace std;
 
 #define EPSILON (1E-8)
-
-#include "geom/Vector3D.h"
 class Point3D {
 public:
     friend ostream &operator<<( ostream &os, const Point3D& point);

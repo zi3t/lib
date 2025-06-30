@@ -6,13 +6,12 @@
 
 /* 
  * File:   SLinkedListSE.h
- * Author: LTSACH
  *
  * Created on 31 August 2020, 21:00
  */
 
-#ifndef SLINKEDLISTSE_H
-#define SLINKEDLISTSE_H
+#ifndef SORTING_SLINKEDLISTSE_H_
+#define SORTING_SLINKEDLISTSE_H_
 
 #include "list/SLinkedList.h"
 #include "sorting/ISort.h"

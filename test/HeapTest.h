@@ -6,13 +6,12 @@
 
 /* 
  * File:   HeapTest.h
- * Author: LTSACH
  *
  * Created on 27 August 2020, 11:32
  */
 
-#ifndef HEAPTEST_H
-#define HEAPTEST_H
+#ifndef TEST_HEAPTEST_H_
+#define TEST_HEAPTEST_H_
 
 #include "doctest.h"
 

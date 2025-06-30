@@ -6,13 +6,12 @@
 
 /* 
  * File:   IBST.h
- * Author: LTSACH
  *
  * Created on 20 August 2020, 15:05
  */
 
-#ifndef IBST_H
-#define IBST_H
+#ifndef TREE_IBST_H_
+#define TREE_IBST_H_
 #include <memory>
 #include <string>
 using namespace std;

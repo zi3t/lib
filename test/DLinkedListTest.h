@@ -6,13 +6,12 @@
 
 /* 
  * File:   DLinkedListTest.h
- * Author: LTSACH
  *
  * Created on 25 August 2020, 11:15
  */
 
-#ifndef DLINKEDLISTTEST_H
-#define DLINKEDLISTTEST_H
+#ifndef TEST_DLINKEDLISTTEST_H_
+#define TEST_DLINKEDLISTTEST_H_
 #include "doctest.h"
 #include "list/DLinkedList.h"
 #include "util/Point.h"

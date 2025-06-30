@@ -6,13 +6,12 @@
 
 /* 
  * File:   QuickSort.h
- * Author: LTSACH
  *
  * Created on 14 September 2020, 18:26
  */
 
-#ifndef QUICKSORT_H
-#define QUICKSORT_H
+#ifndef SORTING_QUICKSORT_H_
+#define SORTING_QUICKSORT_H_
 #include "sorting/ISort.h"
 
 template<class T>

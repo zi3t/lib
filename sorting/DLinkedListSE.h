@@ -6,13 +6,12 @@
 
 /* 
  * File:   DLinkedListSE.h
- * Author: LTSACH
  *
  * Created on 31 August 2020, 14:13
  */
 
-#ifndef DLINKEDLISTSE_H
-#define DLINKEDLISTSE_H
+#ifndef SORTING_DLINKEDLISTSE_H_
+#define SORTING_DLINKEDLISTSE_H_
 #include "list/DLinkedList.h"
 #include "sorting/ISort.h"
 

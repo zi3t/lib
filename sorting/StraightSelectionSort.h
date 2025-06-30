@@ -6,13 +6,12 @@
 
 /* 
  * File:   StraightSelectionSort.h
- * Author: LTSACH
  *
  * Created on 23 August 2020, 17:10
  */
 
-#ifndef STRAIGHTSELECTIONSORT_H
-#define STRAIGHTSELECTIONSORT_H
+#ifndef SORTING_STRAIGHTSELECTIONSORT_H_
+#define SORTING_STRAIGHTSELECTIONSORT_H_
 
 #include "sorting/ISort.h"
 

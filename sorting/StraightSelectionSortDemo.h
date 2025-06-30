@@ -6,18 +6,17 @@
 
 /* 
  * File:   StraightSelectionSortDemo.h
- * Author: LTSACH
  *
  * Created on 23 August 2020, 17:10
  */
 
-#ifndef STRAIGHTSELECTIONSORTDEMO_H
-#define STRAIGHTSELECTIONSORTDEMO_H
+#ifndef SORTING_STRAIGHTSELECTIONSORTDEMO_H_
+#define SORTING_STRAIGHTSELECTIONSORTDEMO_H_
 
 
+#include "sorting/StraightSelectionSort.h"
 #include <iostream>
 #include <iomanip>
-#include "sorting/StraightSelectionSort.h"
 using namespace std;
 
 void straightSelDemo1(){

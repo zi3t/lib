@@ -6,22 +6,19 @@
 
 /* 
  * File:   HeapDemo.h
- * Author: LTSACH
  *
  * Created on 22 August 2020, 18:30
  */
 
-#ifndef HEAPDEMO_H
-#define HEAPDEMO_H
-
-#include <math.h>
-#include <string>
-#include <sstream>
-
+#ifndef HEAP_HEAPDEMO_H_
+#define HEAP_HEAPDEMO_H_
 
 #include "heap/Heap.h"
 #include "util/Point.h"
 #include "util/sampleFunc.h"
+#include <math.h>
+#include <string>
+#include <sstream>
 
 /* Min-Heap:
  Input: {50, 20, 15, 10, 8, 6, 7, 23};

@@ -6,13 +6,12 @@
 
 /* 
  * File:   AbstractGraph.h
- * Author: LTSACH
  *
  * Created on 23 August 2020, 17:48
  */
 
-#ifndef ABSTRACTGRAPH_H
-#define ABSTRACTGRAPH_H
+#ifndef GRAPH_ABSTRACTGRAPH_H_
+#define GRAPH_ABSTRACTGRAPH_H_
 #include "graph/IGraph.h"
 #include <string>
 #include <sstream>

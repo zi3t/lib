@@ -6,13 +6,12 @@
 
 /* 
  * File:   runEx.h
- * Author: LTSACH
  *
  * Created on 10 September 2020, 09:55
  */
 
-#ifndef RUNEX_H
-#define RUNEX_H
+#ifndef EXERCISES_RUNEX_H_
+#define EXERCISES_RUNEX_H_
 #include "doctest.h"
 #include "list/DLinkedListDemo.h"
 #include "list/SLinkedListDemo.h"

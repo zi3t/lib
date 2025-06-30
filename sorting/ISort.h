@@ -6,13 +6,12 @@
 
 /* 
  * File:   ISort.h
- * Author: LTSACH
  *
  * Created on 23 August 2020, 16:20
  */
 
-#ifndef ISORT_H
-#define ISORT_H
+#ifndef SORTING_ISORT_H_
+#define SORTING_ISORT_H_
 
 template<class T>
 class ISort{

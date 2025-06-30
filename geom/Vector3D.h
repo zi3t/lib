@@ -6,13 +6,12 @@
 
 /* 
  * File:   Vector3D.h
- * Author: LTSACH
  *
  * Created on 8 June 2021, 18:43
  */
 
-#ifndef VECTOR3D_H
-#define VECTOR3D_H
+#ifndef GEOM_VECTOR3D_H_
+#define GEOM_VECTOR3D_H_
 
 #include <iostream>
 #include <iomanip>

@@ -6,13 +6,12 @@
 
 /* 
  * File:   XHashMapTest.h
- * Author: LTSACH
  *
  * Created on 27 August 2020, 12:40
  */
 
-#ifndef XHASHMAPTEST_H
-#define XHASHMAPTEST_H
+#ifndef TEST_XHASHMAPTEST_H_
+#define TEST_XHASHMAPTEST_H_
 
 
 #include "doctest.h"

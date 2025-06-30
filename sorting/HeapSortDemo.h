@@ -6,13 +6,12 @@
 
 /* 
  * File:   HeapSortDemo.h
- * Author: LTSACH
  *
  * Created on 14 September 2020, 18:10
  */
 
-#ifndef HEAPSORTDEMO_H
-#define HEAPSORTDEMO_H
+#ifndef SORTING_HEAPSORTDEMO_H_
+#define SORTING_HEAPSORTDEMO_H_
 #include "sorting/HeapSort.h"
 
 #include <iostream>

@@ -6,18 +6,17 @@
 
 /* 
  * File:   DLinkedListDemo.h
- * Author: LTSACH
  *
  * Created on 19 August 2020, 21:34
  */
 
-#ifndef DLINKEDLISTDEMO_H
-#define DLINKEDLISTDEMO_H
+#ifndef LIST_DLINKEDLISTDEMO_H_
+#define LIST_DLINKEDLISTDEMO_H_
 
-#include <iostream>
-#include <iomanip>
 #include "list/DLinkedList.h"
 #include "util/Point.h"
+#include <iostream>
+#include <iomanip>
 using namespace std;
 
 void dlistDemo1(){

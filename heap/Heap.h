@@ -6,16 +6,15 @@
 
 /* 
  * File:   Heap.h
- * Author: LTSACH
  *
  * Created on 22 August 2020, 18:18
  */
 
-#ifndef HEAP_H
-#define HEAP_H
+#ifndef HEAP_HEAP_H_
+#define HEAP_HEAP_H_
+#include "heap/IHeap.h"
 #include <iostream>
 #include <memory.h>
-#include "heap/IHeap.h"
 #include <sstream>
 
 /*

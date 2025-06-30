@@ -6,13 +6,12 @@
 
 /* 
  * File:   BubbleSort.h
- * Author: LTSACH
  *
  * Created on 23 August 2020, 17:16
  */
 
-#ifndef BUBBLESORT_H
-#define BUBBLESORT_H
+#ifndef SORTING_BUBBLESORT_H_
+#define SORTING_BUBBLESORT_H_
 
 #include "sorting/ISort.h"
 

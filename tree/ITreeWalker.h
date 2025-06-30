@@ -6,13 +6,12 @@
 
 /* 
  * File:   ITreeWalker.h
- * Author: LTSACH
  *
  * Created on 20 August 2020, 15:05
  */
 
-#ifndef ITREEWALKER_H
-#define ITREEWALKER_H
+#ifndef TREE_ITREEWALKER_H_
+#define TREE_ITREEWALKER_H_
 #include "list/DLinkedList.h"
 
 template<class K, class V>

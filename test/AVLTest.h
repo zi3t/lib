@@ -6,13 +6,12 @@
 
 /* 
  * File:   AVLTest.h
- * Author: LTSACH
  *
  * Created on 13 September 2020, 11:11
  */
 
-#ifndef AVLTEST_H
-#define AVLTEST_H
+#ifndef TEST_AVLTEST_H_
+#define TEST_AVLTEST_H_
 
 #include "doctest.h"
 #include "tree/AVL.h"

@@ -6,17 +6,16 @@
 
 /* 
  * File:   StackDemo.h
- * Author: LTSACH
  *
  * Created on 20 August 2020, 07:49
  */
 
-#ifndef STACKDEMO_H
-#define STACKDEMO_H
-#include <iostream>
-#include <iomanip>
+#ifndef STACKNQUEUE_STACKDEMO_H_
+#define STACKNQUEUE_STACKDEMO_H_
 #include "util/Point.h"
 #include "stacknqueue/Stack.h"
+#include <iostream>
+#include <iomanip>
 using namespace std;
 
 void stackDemo1(){

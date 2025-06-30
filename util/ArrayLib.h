@@ -6,13 +6,12 @@
 
 /* 
  * File:   IntArray.h
- * Author: LTSACH
  *
  * Created on 31 August 2020, 20:21
  */
 
-#ifndef INTARRAY_H
-#define INTARRAY_H
+#ifndef UTIL_ARRAYLIB_H_
+#define UTIL_ARRAYLIB_H_
 #include <random>
 #include <iostream>
 #include <iomanip>

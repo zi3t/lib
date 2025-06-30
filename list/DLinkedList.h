@@ -6,13 +6,12 @@
 
 /* 
  * File:   DLinkedList.h
- * Author: LTSACH
  *
  * Created on 19 August 2020, 21:21
  */
 
-#ifndef DLINKEDLIST_H
-#define DLINKEDLIST_H
+#ifndef LIST_DLINKEDLIST_H_
+#define LIST_DLINKEDLIST_H_
 
 #include "list/IList.h"
 
