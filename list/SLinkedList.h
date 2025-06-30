@@ -244,7 +244,6 @@ void SLinkedList<T>::removeInternalData(){
 template<class T>
 SLinkedList<T>::SLinkedList(const SLinkedList<T>& list){
     //Initialize to the empty condition
-    //YOUR CODE HERE:  create two dummy nodes: head and tail
     this->head = new Node();
     this->tail = new Node();
     copyFrom(list);
@@ -262,7 +261,6 @@ template<class T>
 SLinkedList<T>::~SLinkedList() {
     removeInternalData(); 
     
-    //YOUR CODE HERE: delete dummy nodes
     if(head != 0) delete head;
     if(tail != 0) delete tail;
 }
@@ -270,7 +268,6 @@ SLinkedList<T>::~SLinkedList() {
 template<class T>
 void SLinkedList<T>::add(T e) {
     Node* node = new Node(e, tail);
-    //YOUR CODE HERE: 
     tail->next->next = node;
     tail->next = node;
     count += 1;
@@ -290,7 +287,6 @@ void SLinkedList<T>::add(int index, T e) {
     Node* curNode = prevNode->next;
     prevNode->next = newNode;
     newNode->next = curNode;
-    //YOUR CODE HERE
     
     //Change tail->next if needed
     if(index == count)
@@ -302,7 +298,6 @@ T SLinkedList<T>::removeAt(int index){
     if((index < 0) || (index > count - 1))
         throw std::out_of_range("The index is out of range!");
 
-    //YOUR CODE HERE
     Node* prevNode = head;
     int cursor = -1;
 
@@ -322,7 +317,6 @@ T SLinkedList<T>::removeAt(int index){
 
 template<class T>
 bool SLinkedList<T>::removeItem(T item, void (*removeItemData)(T)){
-    //YOUR CODE HERE
     bool found = false;
     Node* pNode = head->next;
     Node* pPrev = head;
@@ -348,21 +342,18 @@ bool SLinkedList<T>::removeItem(T item, void (*removeItemData)(T)){
 
 template<class T>
 bool SLinkedList<T>::empty(){
-    //YOUR CODE HERE
     if(!this->count) return true;
     return false;
 }
 
 template<class T>
 int  SLinkedList<T>::size(){
-    //YOUR CODE HERE
     return this->count;
 }
 
 template<class T>
 void SLinkedList<T>::clear(){
     removeInternalData();
-    //YOUR CODE HERE
     head->next = tail;
     tail->next = head;
     this->count = 0;
@@ -372,7 +363,6 @@ template<class T>
 T& SLinkedList<T>::get(int index){
     if((index < 0) || (index > count - 1))
         throw std::out_of_range("The index is out of range!");
-    //YOUR CODE HERE
     Node* prevNode = head;
     int cursor = -1;
     while(cursor <index -1){
@@ -384,7 +374,6 @@ T& SLinkedList<T>::get(int index){
 
 template<class T>
 int  SLinkedList<T>::indexOf(T item){
-    //YOUR CODE HERE
     bool found = false;
     Node* pNode = head->next;
     int foundAt = 0;
@@ -402,7 +391,6 @@ int  SLinkedList<T>::indexOf(T item){
 }
 template<class T>
 bool SLinkedList<T>::contains(T item){
-    //YOUR CODE HERE
     return indexOf(item) != -1;
 }
 

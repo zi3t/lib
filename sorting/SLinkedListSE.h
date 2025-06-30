@@ -62,7 +62,6 @@ protected:
         }
     };
     void devide(typename SLinkedList<T>::Node*& first, typename SLinkedList<T>::Node*& second){
-        //YOUR CODE HERE
          typename SLinkedList<T>::Node *midpoint = first;
         typename SLinkedList<T>::Node *last = first->next;
         while (last != 0)
@@ -78,7 +77,6 @@ protected:
         midpoint->next = 0;
     }
     void merge(typename SLinkedList<T>::Node*& first, typename SLinkedList<T>::Node*& second, int (*comparator)(T&,T&)=0){
-        //YOUR CODE HERE
         typename SLinkedList<T>::Node combined;
         typename SLinkedList<T>::Node *lastSorted = &combined;
         while ((first != 0) && (second != 0))

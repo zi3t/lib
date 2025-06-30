@@ -188,7 +188,6 @@ Heap<T>::Heap(
     int (*comparator)(T &, T &),
     void (*deleteUserData)(Heap<T> *))
 {
-    //YOUR CODE HERE
     capacity = 10;
     count = 0;
     elements = new T[capacity];
@@ -199,7 +198,6 @@ Heap<T>::Heap(
 template <class T>
 Heap<T>::Heap(const Heap<T> &heap)
 {
-    //YOUR CODE HERE
     copyFrom(heap);
 }
 
@@ -207,7 +205,6 @@ template <class T>
 Heap<T> &Heap<T>::operator=(const Heap<T> &heap)
 {
     removeInternalData();
-    //YOUR CODE HERE
     copyFrom(heap);
     return *this;
 }
@@ -221,7 +218,6 @@ Heap<T>::~Heap()
 template <class T>
 void Heap<T>::push(T item)
 { //item  = 25
-    //YOUR CODE HERE
     ensureCapacity(count + 1);
     elements[count] = item;
     count++;
@@ -246,7 +242,6 @@ void Heap<T>::push(T item)
 template <class T>
 T Heap<T>::pop()
 {
-    //YOUR CODE HERE
     if (count == 0)
     {
         throw std::underflow_error("Calling to pop with empty heap");
@@ -272,7 +267,6 @@ T Heap<T>::pop()
 template <class T>
 const T Heap<T>::peek()
 {
-    //YOUR CODE HERE
     if (count == 0)
         throw std::underflow_error("Calling to peek with the empty heap.");
     return elements[0];
@@ -281,7 +275,6 @@ const T Heap<T>::peek()
 template <class T>
 void Heap<T>::remove(T item, void (*removeItemData)(T))
 {
-    //YOUR CODE HERE
     int foundIdx = this->getItem(item);
     if (foundIdx == -1)
         return;
@@ -306,7 +299,6 @@ void Heap<T>::remove(T item, void (*removeItemData)(T))
 template <class T>
 bool Heap<T>::contains(T item)
 {
-    //YOUR CODE HERE
     bool found = false;
     for (int idx = 0; idx < count; idx++)
     {
@@ -322,14 +314,12 @@ bool Heap<T>::contains(T item)
 template <class T>
 int Heap<T>::size()
 {
-    //YOUR CODE HERE
     return count;
 }
 
 template <class T>
 void Heap<T>::heapify(T array[], int size)
 {
-    //YOUR CODE HERE
     for (int idx = 0; idx < size; idx++)
         push(array[idx]);
 }
@@ -339,7 +329,6 @@ void Heap<T>::clear()
 {
     removeInternalData();
 
-    //YOUR CODE HERE
     capacity = 10;
     count = 0;
     elements = new T[capacity];
@@ -348,7 +337,6 @@ void Heap<T>::clear()
 template <class T>
 bool Heap<T>::empty()
 {
-    //YOUR CODE HERE
     return count == 0;
 }
 
@@ -415,7 +403,6 @@ void Heap<T>::swap(int a, int b)
 template <class T>
 void Heap<T>::reheapUp(int position)
 {
-    //YOUR CODE HERE
     if (position <= 0)
         return;
     int parent = (position - 1) / 2;
@@ -429,7 +416,6 @@ void Heap<T>::reheapUp(int position)
 template <class T>
 void Heap<T>::reheapDown(int position)
 {
-    //YOUR CODE HERE
     int lChild = (position * 2) + 1;
     int rChild = (position * 2) + 2;
     int lastPos = this->count - 1;

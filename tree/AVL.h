@@ -125,7 +125,6 @@ private:
      */
     XNode *rotateLeft(XNode *root)
     {
-        //YOUR CODE HERE
         XNode *newRoot = root->pRight;
         root->pRight = newRoot->pLeft;
         newRoot->pLeft = root;
@@ -160,7 +159,6 @@ private:
      */
     XNode *rotateRight(XNode *root)
     {
-        //YOUR CODE HERE
         XNode *newRoot = root->pLeft;
         root->pLeft = newRoot->pRight;
         newRoot->pRight = root;
@@ -171,7 +169,6 @@ private:
 
     XNode *rebalance(XNode *root)
     {
-        //YOUR CODE HERE
         if (root == 0)
             return root;
 
@@ -212,7 +209,6 @@ private:
 
     XNode *add(XNode *root, XNode *newNode)
     {
-        //YOUR CODE HERE
         if (root == 0)
             return newNode;
         if (newNode->data.key < root->data.key)
@@ -225,7 +221,6 @@ private:
 
     XNode *remove(XNode *root, K key, bool &success, V &retValue)
     {
-        //YOUR CODE HERE
         if (root == 0)
         {
             success = false;

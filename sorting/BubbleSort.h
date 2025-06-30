@@ -21,7 +21,6 @@ class BubbleSort : public ISort<T>
 public:
     void sort(T array[], int size, int (*comparator)(T &, T &))
     {
-        //YOUR CODE HERE
         int walker;
         int current = 0;
         bool flag = false;

@@ -18,7 +18,6 @@ template<class T>
 class StraightInsertionSort: public ISort<T>{
 public:
     void sort(T array[], int size, int (*comparator)(T&,T&)){
-        //YOUR CODE HERE
         int current;
         int walker;
         T temp;
