@@ -289,21 +289,19 @@ void Heap<T>::remove(T item, void (*removeItemData)(T))
 
     if (removeItemData != 0)
         removeItemData(elements[foundIdx]);
-    if (foundIdx == 0)
-        pop();
-    else
-    {
-        int temp = (count - 1) - (foundIdx + 1) + 1;
-        memcpy(&elements[foundIdx], &elements[foundIdx + 1], temp * sizeof(T));
-        count -= 1;
 
-        int first_data = foundIdx;
-        int last_data = count - 1;
-        count = foundIdx;
+    int remain = count - foundIdx - 1;
+    if (remain > 0)
+        memcpy(&elements[foundIdx], &elements[foundIdx + 1], remain * sizeof(T));
 
-        for (int idx = first_data; idx <= last_data; idx++)
-            push(elements[idx]);
-    }
+    count -= 1;
+
+    int first_data = foundIdx;
+    int last_data = count - 1;
+    count = foundIdx;
+
+    for (int idx = first_data; idx <= last_data; idx++)
+        push(elements[idx]);
 }
 
 template <class T>
