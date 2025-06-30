@@ -24,7 +24,6 @@ public:
                 Heap<T>(comparator, deleteUserData){
     }
     void sort(T array[], int size, int (*comparator)(T&,T&)=0){  
-        //YOUR CODE HERE
         Heap<T> minHeap(comparator);
         minHeap.heapify(array, size);
         for(int i = 0; i< size ; i++) array[i] = minHeap.pop();

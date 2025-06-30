@@ -40,7 +40,6 @@ public:
     }
     DLinkedList<T> bfsSort(bool sorted = true){
         DLinkedList<T> topoOrder;
-        //YOUR CODE HERE
         XHashMap<T, int> indegreeMap = vertex2inDegree(this->hash_code);
         DLinkedListSE<T> list = listOfZeroInDegrees();
         //if(sorted) list.sort();
@@ -69,7 +68,6 @@ public:
     }
     
     DLinkedList<T> dfsSort(bool sorted = true){
-        //YOUR CODE HERE
         DLinkedList<T> topoOrder;
         XHashMap<T, int> outdegreeMap = vertex2outDegree(this->hash_code);
         DLinkedListSE<T> list = listOfZeroInDegrees();
@@ -194,7 +192,6 @@ int TopoSorter<T>::BFS = 1;
 //     }
 //     DLinkedList<T> bfsSort(bool sorted = true){
 //         DLinkedList<T> topoOrder;
-//         //YOUR CODE HERE
 //         Queue<T> open;
 //         XHashMap<T, int> indegreeTable = vertex2inDegree();
 //         DLinkedList<T> list = listOfZeroInDegrees();

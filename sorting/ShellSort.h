@@ -36,7 +36,6 @@ public:
     void sortSegment(T array[], int size, 
             int segment_idx, int cur_segment_total,
             int (*comparator)(T&, T&)){
-        //YOUR CODE HERE
         int current;
         int walker;
         T temp;
@@ -60,7 +59,6 @@ public:
          + The first must be 1, for examples: [1,3,7]
     */
     void sort(T array[], int size, int (*comparator)(T&,T&)){
-        //YOUR CODE HERE
         for(int k = this->num_phases - 1; k >= 0; k--) {
             int nsegment = num_segment_list[k];
             for(int segment_idx = 0; segment_idx < nsegment; segment_idx++){

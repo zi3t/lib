@@ -27,7 +27,6 @@ public:
                                         };
     void sort(int (*comparator)(T &, T &) = 0)
     {
-        //YOUR CODE HERE
         if (this->count > 0)
         {
             typename DLinkedList<T>::Node *first = this->head->next;
@@ -63,7 +62,6 @@ protected:
     }
     void mergeSort(typename DLinkedList<T>::Node *&head, int (*comparator)(T &, T &) = 0)
     {
-        //YOUR CODE HERE
         if ((head != 0) && (head->next != 0))
         {
             typename DLinkedList<T>::Node *second;
@@ -75,7 +73,6 @@ protected:
     };
     void devide(typename DLinkedList<T>::Node *&first, typename DLinkedList<T>::Node *&second)
     {
-        //YOUR CODE HERE
         typename DLinkedList<T>::Node *midpoint = first;
         typename DLinkedList<T>::Node *last = first->next;
         while (last != 0)
@@ -93,7 +90,6 @@ protected:
     }
     void merge(typename DLinkedList<T>::Node *&first, typename DLinkedList<T>::Node *&second, int (*comparator)(T &, T &) = 0)
     {
-        //YOUR CODE HERE
         typename DLinkedList<T>::Node combined;
         typename DLinkedList<T>::Node *lastSorted = &combined;
         while ((first != 0) && (second != 0))

@@ -300,7 +300,6 @@ DLinkedList<T>::DLinkedList(
 
 template<class T>
 DLinkedList<T>::DLinkedList(const DLinkedList<T>& list){
-    //YOUR CODE HERE
     this->head = new Node();
         this->tail = new Node();
     copyFrom(list);
@@ -318,7 +317,6 @@ template<class T>
 DLinkedList<T>::~DLinkedList() {
     removeInternalData();
     
-    //YOUR CODE HERE
     if(this->head != 0) delete this->head;
        if(this->tail != 0) delete this->tail;
 }
@@ -326,7 +324,6 @@ DLinkedList<T>::~DLinkedList() {
 template<class T>
 void DLinkedList<T>::add(T e) {
     Node* node = new Node(e, tail, tail->prev);
-    //YOUR CODE HERE
     (tail->prev)->next = node;
         tail->prev = node;
         this->count += 1;
@@ -336,7 +333,6 @@ void DLinkedList<T>::add(int index, T e) {
     if((index < 0) || (index > count))
         throw std::out_of_range("The index is out of range!");
     
-    //YOUR CODE HERE
     //1. Create a new Node containing user's data
        Node *newNode = new Node(e, NULL, NULL);
 
@@ -401,7 +397,6 @@ T DLinkedList<T>::removeAt(int index){
     if((index < 0) || (index > count - 1))
         throw std::out_of_range("The index is out of range!");
     
-    //YOUR CODE HERE
     if(this->count == 0)  throw std::out_of_range("Segmentation fault!");
         //FROM HERE: index in [0, index - 1]
         Node *prevNode = getPreviousNodeOf(index);
@@ -428,13 +423,11 @@ T DLinkedList<T>::removeAt(int index){
 
 template<class T>
 bool DLinkedList<T>::empty(){
-    //YOUR CODE HERE
     return this->count == 0;
 }
 
 template<class T>
 int  DLinkedList<T>::size(){
-    //YOUR CODE HERE
     return this->count;
 }
 
@@ -442,7 +435,6 @@ template<class T>
 void DLinkedList<T>::clear(){
     removeInternalData();
     
-    //YOUR CODE HERE
     // put to the empty condition
         head->next = tail;
         tail->next = 0;
@@ -459,13 +451,11 @@ T& DLinkedList<T>::get(int index){
     Node* prevNode = getPreviousNodeOf(index);
     
     //HERE: prevNode points to previous item (at index - 1); ready for get
-    //YOUR CODE HERE
     return prevNode->next->data;
 }
 
 template<class T>
 int  DLinkedList<T>::indexOf(T item){
-    //YOUR CODE HERE
     bool found = false;
        Node *pNode = this->head->next;
        int foundAt = 0;
@@ -487,7 +477,6 @@ int  DLinkedList<T>::indexOf(T item){
 
 template<class T>
 bool DLinkedList<T>::removeItem(T item, void (*removeItemData)(T)){
-    //YOUR CODE HERE
     bool found = false;
         Node *pNode = this->head->next;
 
@@ -515,7 +504,6 @@ bool DLinkedList<T>::removeItem(T item, void (*removeItemData)(T)){
 
 template<class T>
 bool DLinkedList<T>::contains(T item){
-    //YOUR CODE HERE
     return indexOf(item) != -1;
 }
 

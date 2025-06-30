@@ -21,7 +21,6 @@ template<class T>
 class StraightSelectionSort: public ISort<T>{
 public:   
     void sort(T array[], int size, int (*comparator)(T&,T&)){
-        //YOUR CODE HERE
         int current = 0;
         int walker;
         while(current < size - 1) {

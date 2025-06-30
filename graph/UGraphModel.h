@@ -36,7 +36,6 @@ public:
     }
     
     void connect(T from, T to, float weight=0){
-        //YOUR CODE HERE
         typename AbstractGraph<T>::VertexNode *nodeF = this->getVertexNode(from);
         typename AbstractGraph<T>::VertexNode *nodeT = this->getVertexNode(to);
         if (nodeF == 0)
@@ -54,7 +53,6 @@ public:
         }
     }
     void disconnect(T from, T to){
-        //YOUR CODE HERE
          typename AbstractGraph<T>::VertexNode *nodeF = this->getVertexNode(from);
         typename AbstractGraph<T>::VertexNode *nodeT = this->getVertexNode(to);
         if (nodeF == 0)
@@ -74,7 +72,6 @@ public:
         }
     }
     void remove(T vertex){
-        //YOUR CODE HERE
         typename AbstractGraph<T>::VertexNode *nodeF = this->getVertexNode(vertex);
         if (nodeF == 0)
             throw VertexNotFoundException(this->vertex2Str(*nodeF));
