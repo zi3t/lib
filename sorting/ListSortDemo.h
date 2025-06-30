@@ -54,11 +54,11 @@ void listSortDemo2(){
     
     list.println(&Point::point2str);
     
-    cout << "Ascending:" << endl;
+    std::cout << "Ascending:" << std::endl;
     list.sort(&sortPointComparator);
     list.println(&Point::point2str);
     
-    cout << "Descending:" << endl;
+    std::cout << "Descending:" << std::endl;
     list.sort(&sortPointComparatorDESC_Y);
     list.println(&Point::point2str);
  
@@ -74,11 +74,11 @@ void listSortDemo3(){
     
     list.println(&Point::point2str);
     
-    cout << "Ascending:" << endl;
+    std::cout << "Ascending:" << std::endl;
     list.sort(&sortPointComparator);
     list.println(&Point::point2str);
     
-    cout << "Descending:" << endl;
+    std::cout << "Descending:" << std::endl;
     list.sort(&sortPointComparatorDESC_Y);
     list.println(&Point::point2str);
  
@@ -94,11 +94,11 @@ void listSortDemo4(){
     
     list.println(&Point::point2str);
     
-    cout << "Ascending:" << endl;
+    std::cout << "Ascending:" << std::endl;
     list.sort(&sortPointComparator);
     list.println(&Point::point2str);
     
-    cout << "Descending:" << endl;
+    std::cout << "Descending:" << std::endl;
     list.sort(&sortPointComparatorDESC_Y);
     list.println(&Point::point2str);
  

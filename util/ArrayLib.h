@@ -17,46 +17,47 @@
 #include <iomanip>
 #include <string>
 #include <sstream>
+#include <vector>
 #include <cassert>
-using namespace std;
+
 
 typedef unsigned char uint8;
 typedef char int8;
 
 template<class T>
-string int_to_string(T *data, int nrows, int ncols, int width=6){
+std::string int_to_string(T *data, int nrows, int ncols, int width=6){
     int stride = ncols;
-    stringstream os;
-    os << "[" << endl;
+    std::stringstream os;
+    os << "[" << std::endl;
     for(int r=0; r < nrows; r++){
         os << "\t[";
         for(int c=0; c < ncols; c++){
             int index = r*stride + c;
-            os << setw(width) << (int)data[index];
+            os << std::setw(width) << (int)data[index];
         }
-        os << "]" << endl;
+        os << "]" << std::endl;
     }
-    os << "]" << endl;
+    os << "]" << std::endl;
     return os.str();
 }
 
 
 
 template<class T>
-string float_to_string(T *data, int nrows, int ncols, int width=6, int prec=2){
+std::string float_to_string(T *data, int nrows, int ncols, int width=6, int prec=2){
     int stride = ncols;
-    stringstream os;
-    os << "[" << endl;
+    std::stringstream os;
+    os << "[" << std::endl;
     for(int r=0; r < nrows; r++){
         os << "\t[";
         for(int c=0; c < ncols; c++){
             int index = r*stride + c;
-            os << fixed
-               << setw(width) << setprecision(prec) << data[index];
+            os << std::fixed
+               << std::setw(width) << std::setprecision(prec) << data[index];
         }
-        os << "]" << endl;
+        os << "]" << std::endl;
     }
-    os << "]" << endl;
+    os << "]" << std::endl;
     return os.str();
 }
 
@@ -66,7 +67,7 @@ template<class T>
 void int_uniform(   T *data, int numel,
                     T minValue=0, T maxValue=100, bool manualSeed=false, int seedValue=0
                     ){
-    uniform_int_distribution<T> dist(minValue, maxValue);
+    std::uniform_int_distribution<T> dist(minValue, maxValue);
 
     if(manualSeed){
         std::default_random_engine engine = std::default_random_engine(static_cast<long unsigned int>(seedValue));
@@ -81,7 +82,7 @@ template<class T>
 void real_uniform(  T *data, int numel,
                     T minValue=0, T maxValue=100, bool manualSeed=false, int seedValue=0
                     ){
-    uniform_real_distribution<T> dist(minValue, maxValue);
+    std::uniform_real_distribution<T> dist(minValue, maxValue);
 
     if(manualSeed){
         std::default_random_engine engine = std::default_random_engine(static_cast<long unsigned int>(seedValue));
@@ -117,7 +118,7 @@ protected:
             this->data = new T[nitems]{};
             //init here
         }
-        else this->data = NULL;
+        else this->data = nullptr;
     }
     void do_assert(int dtype){
         switch(dtype){
@@ -149,7 +150,7 @@ public:
         
     }
     ~Matrix(){
-        if(this->data != NULL) delete []data;
+        if(this->data != nullptr) delete [] data;
     }
     
     int numel(){
@@ -180,8 +181,8 @@ public:
         int stride = this->ncols;
         this->data[row*stride + col] = value;
     }
-    vector<int> sumrows(){
-        vector<int> results;
+    std::vector<int> sumrows(){
+        std::vector<int> results;
         for(int r=0; r < rows(); r++){
             int sum = 0;
             for(int c=0; c < cols(); c++){
@@ -191,8 +192,8 @@ public:
         }
         return results;
     }
-    vector<int> sumcols(){
-        vector<int> results;
+    std::vector<int> sumcols(){
+        std::vector<int> results;
         for(int c=0; c < cols(); c++){
             int sum = 0;
             for(int r=0; r < rows(); r++){
@@ -253,7 +254,7 @@ public:
     }
     Matrix& binomial(float p=0.5, bool manualSeed=false, int seedValue=0, bool symetric=false){
         //data_binomial<T>(this->data, this->numel(), p, manualSeed, seedValue);
-        binomial_distribution<int> dist(1, p);
+        std::binomial_distribution<int> dist(1, p);
 
         if(manualSeed){
             std::default_random_engine engine = std::default_random_engine(static_cast<long unsigned int>(seedValue));
@@ -288,9 +289,9 @@ public:
     }
     */
     void println(int width=6, int prec=2){
-        cout << toString(width, prec) << endl;
+        std::cout << toString(width, prec) << std::endl;
     }
-    string toString(int width=6, int prec=2){
+    std::string toString(int width=6, int prec=2){
         if(this->dtype == INT32)
             return int_to_string<int>((int*)(this->data), this->nrows, this->ncols, width);
         if(this->dtype == INT8)
@@ -316,7 +317,7 @@ int* genIntArray(int size, int minValue=0, int maxValue=100,
         engine = new std::default_random_engine(static_cast<long unsigned int>(seedValue));
     else
         engine = new std::default_random_engine(static_cast<long unsigned int>(time(0)));
-    uniform_int_distribution<int> dist(minValue, maxValue);
+    std::uniform_int_distribution<int> dist(minValue, maxValue);
 
     //
     for(int idx=0; idx < size; idx++) head[idx] = dist(*engine);
@@ -328,7 +329,7 @@ int genInt(int minValue=0, int maxValue=100,
                bool manualSeed=false, int seedValue=0){
 
     int value;
-    uniform_int_distribution<int> dist(minValue, maxValue);
+    std::uniform_int_distribution<int> dist(minValue, maxValue);
     
     if(manualSeed){
         std::default_random_engine engine = std::default_random_engine(static_cast<long unsigned int>(seedValue));
@@ -345,7 +346,7 @@ int* permutation(int size, bool manualSeed=false, int seedValue=0){
     int *ptr = new int[size];
     for(int idx=0; idx < size; idx++) ptr[idx] = idx;
     
-    uniform_int_distribution<int> dist(0, size-1);
+    std::uniform_int_distribution<int> dist(0, size-1);
     int a, b, t;
     if(manualSeed){
         std::default_random_engine engine = 
@@ -395,21 +396,21 @@ bool isOrdered(T* array, int size, bool ascending ){
 
 template<class T>
 void println(T* array, int size){
-    cout << "[\n";
+    std::cout << "[\n";
     for(int idx=0; idx < size; idx++){
-        cout << array[idx] << endl;
+        std::cout << array[idx] << std::endl;
     }
-    cout << "]\n" << endl;
+    std::cout << "]\n" << std::endl;
 }
 
 template<class T>
 void print(T* array, int size){
-    cout << "[";
+    std::cout << "[";
     for(int idx=0; idx < size-1; idx++){
-        cout << array[idx] << ", ";
+        std::cout << array[idx] << ", ";
     }
-    if(size > 0) cout << array[size-1] << "]\n";
-    else cout << "]\n" << endl;
+    if(size > 0) std::cout << array[size-1] << "]\n";
+    else std::cout << "]\n" << std::endl;
 }
 
 #endif /* INTARRAY_H */

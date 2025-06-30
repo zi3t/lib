@@ -15,7 +15,7 @@
 #include "graph/IGraph.h"
 #include <string>
 #include <sstream>
-using namespace std;
+
 
 
 template<class T>
@@ -32,7 +32,7 @@ protected:
     
     //Function pointers:
     bool (*vertexEQ)(T&, T&); //to compare two vertices
-    string (*vertex2str)(T&); //to obtain string representation of vertices
+    std::string (*vertex2str)(T&); //to obtain string representation of vertices
     
     
     VertexNode* getVertexNode(T& vertex){
@@ -42,13 +42,13 @@ protected:
             if(vertexEQ(node->vertex, vertex) ) return node;
             it++;
         }
-        return 0;
+        return nullptr;
     }
-    string vertex2Str(VertexNode& node){
+    std::string vertex2Str(VertexNode& node){
         return vertex2str(node.vertex);
     }
-    string edge2Str(Edge& edge){
-        stringstream os;
+    std::string edge2Str(Edge& edge){
+        std::stringstream os;
         os << "E("
                 << vertex2str(edge.from->vertex)
                 << ","
@@ -59,8 +59,8 @@ protected:
     
 public:
     AbstractGraph(
-            bool (*vertexEQ)(T&, T&)=0, 
-            string (*vertex2str)(T&)=0){
+            bool (*vertexEQ)(T&, T&)=nullptr,
+            std::string (*vertex2str)(T&)=nullptr){
         
         this->vertexEQ = vertexEQ;
         this->vertex2str = vertex2str;
@@ -68,7 +68,7 @@ public:
     virtual ~AbstractGraph(){}
     
     typedef bool (*vertexEQFunc)(T&, T&);
-    typedef string (*vertex2strFunc)(T&);
+    typedef std::string (*vertex2strFunc)(T&);
     vertexEQFunc getVertexEQ(){
         return this->vertexEQ;
     }
@@ -97,28 +97,28 @@ public:
     }
     virtual bool contains(T vertex){
         VertexNode* node = getVertexNode(vertex);
-        return node != 0;
+        return node != nullptr;
     }
     virtual float weight(T from, T to){
         VertexNode* nodeF = getVertexNode(from);
         VertexNode* nodeT = getVertexNode(to);
-        if(nodeF == 0) throw VertexNotFoundException(vertex2Str(*nodeF));
-        if(nodeT == 0) throw VertexNotFoundException(vertex2Str(*nodeT));
+        if(nodeF == nullptr) throw VertexNotFoundException(vertex2Str(*nodeF));
+        if(nodeT == nullptr) throw VertexNotFoundException(vertex2Str(*nodeT));
         
         Edge* edge = nodeF->getEdge(nodeT);
-        if(edge == 0) throw EdgeNotFoundException(edge2Str(*edge));
+        if(edge == nullptr) throw EdgeNotFoundException(edge2Str(*edge));
         
         return edge->weight;
     }
     virtual DLinkedList<T> getOutwardEdges(T from){
         VertexNode* node = getVertexNode(from);
-        if(node == 0) throw VertexNotFoundException(vertex2Str(*node));
+        if(node == nullptr) throw VertexNotFoundException(vertex2Str(*node));
         return node->getOutwardEdges();
     }
     
     virtual DLinkedList<T>  getInwardEdges(T to){
         VertexNode* nodeT = getVertexNode(to);
-        if(nodeT == 0) throw VertexNotFoundException(vertex2Str(*nodeT));
+        if(nodeT == nullptr) throw VertexNotFoundException(vertex2Str(*nodeT));
         
         DLinkedList<T> list;
         
@@ -152,17 +152,17 @@ public:
     }
     virtual int inDegree(T vertex){
         VertexNode* node = getVertexNode(vertex);
-        if(node == 0) throw VertexNotFoundException(vertex2Str(*node));
+        if(node == nullptr) throw VertexNotFoundException(vertex2Str(*node));
         return node->inDegree();
     }
     virtual int outDegree(T vertex){
         VertexNode* node = getVertexNode(vertex);
-        if(node == 0) throw VertexNotFoundException(vertex2Str(*node));
+        if(node == nullptr) throw VertexNotFoundException(vertex2Str(*node));
         return node->outDegree();
     }
     
     virtual DLinkedList<T> vertices(){
-        DLinkedList<T> list(NULL, vertexEQ);
+        DLinkedList<T> list(nullptr, vertexEQ);
         AbstractGraph<T>::Iterator it;
         for(it = this->begin(); it != this->end(); it++){
             list.add(*it);
@@ -173,31 +173,31 @@ public:
     virtual bool connected(T from, T to){
         typename AbstractGraph<T>::VertexNode* nodeF = this->getVertexNode(from);
         typename AbstractGraph<T>::VertexNode* nodeT = this->getVertexNode(to);
-        if(nodeF == 0) throw VertexNotFoundException(this->vertex2Str(*nodeF));
-        if(nodeT == 0) throw VertexNotFoundException(this->vertex2Str(*nodeT));
+        if(nodeF == nullptr) throw VertexNotFoundException(this->vertex2Str(*nodeF));
+        if(nodeT == nullptr) throw VertexNotFoundException(this->vertex2Str(*nodeT));
         
         typename AbstractGraph<T>::Edge* edge = nodeF->getEdge(nodeT);
-        if(edge == 0) return false;
+        if(edge == nullptr) return false;
         else return true;
     }
     void println(){
-        cout << this->toString() << endl;
+        std::cout << this->toString() << std::endl;
     }
-    virtual string toString(){
-        string mark(50, '=');
-        stringstream os;
-        os << mark << endl;
-        os << left << setw(12) << "Vertices:" << endl;
+    virtual std::string toString(){
+        std::string mark(50, '=');
+        std::stringstream os;
+        os << mark << std::endl;
+        os << std::left << std::setw(12) << "Vertices:" << std::endl;
         typename DLinkedList<VertexNode*>::Iterator nodeIt = nodeList.begin();
         while(nodeIt != nodeList.end()){
             VertexNode* node = *nodeIt;
-            os << node->toString() << endl;
+            os << node->toString() << std::endl;
             nodeIt++;
         }
-        string mark2(30, '-');
-        os << mark2 << endl;
+        std::string mark2(30, '-');
+        os << mark2 << std::endl;
         
-        os << left << setw(12) << "Edges:" << endl;
+        os << std::left << std::setw(12) << "Edges:" << std::endl;
         
         nodeIt = nodeList.begin();
         while(nodeIt != nodeList.end()){
@@ -206,14 +206,14 @@ public:
             typename DLinkedList<Edge*>::Iterator edgeIt = node->adList.begin();
             while(edgeIt != node->adList.end()){
                 Edge* edge = *edgeIt;
-                os << edge->toString() << endl;
+                os << edge->toString() << std::endl;
                 
                 edgeIt++;
             }
             
             nodeIt++;
         }
-        os << mark << endl;
+        os << mark << std::endl;
         return os.str();
     }
     
@@ -245,18 +245,18 @@ public:
         friend class UGraphModel; //UPDATED: added
         T vertex;
         int inDegree_, outDegree_;
-        DLinkedList<Edge*> adList; 
+        DLinkedList<Edge*> adList;
         friend class Edge;
         friend class AbstractGraph;
         
         bool (*vertexEQ)(T&, T&);
-        string (*vertex2str)(T&);
+        std::string (*vertex2str)(T&);
         
     public:
         /*
          * OLD:
         VertexNode(){}
-        VertexNode(T vertex, bool (*vertexEQ)(T&, T&), string (*vertex2str)(T&)){
+        VertexNode(T vertex, bool (*vertexEQ)(T&, T&), std::string (*vertex2str)(T&)){
             this->vertex = vertex;
             this->vertexEQ = vertexEQ;
             this->vertex2str = vertex2str;
@@ -265,7 +265,7 @@ public:
          */
         //UPDATE:
         VertexNode():adList(&DLinkedList<Edge*>::free, &Edge::edgeEQ){}
-        VertexNode(T vertex, bool (*vertexEQ)(T&, T&), string (*vertex2str)(T&))
+        VertexNode(T vertex, bool (*vertexEQ)(T&, T&), std::string (*vertex2str)(T&))
             :adList(&DLinkedList<Edge*>::free, &Edge::edgeEQ){
             this->vertex = vertex;
             this->vertexEQ = vertexEQ;
@@ -277,7 +277,7 @@ public:
         }
         void connect(VertexNode* to, float weight=0){
             Edge* edge = getEdge(to);
-            if(edge == 0){
+            if(edge == nullptr){
                 edge = new Edge(this, to, weight);
                 this->adList.add(edge);
                 edge->from->outDegree_ += 1;
@@ -303,7 +303,7 @@ public:
                 if(edge->from->equals(this) && edge->to->equals(to) ) return edge;
                 it++;
             }
-            return 0;
+            return nullptr;
         }
         bool equals(VertexNode* node){
             return this->vertexEQ(this->vertex, node->vertex);
@@ -323,8 +323,8 @@ public:
         int outDegree(){
             return this->outDegree_;
         }
-        string toString(){
-            stringstream os;
+        std::string toString(){
+            std::stringstream os;
             os << "V("
                     << this->vertex << ", "
                     << "in: " << this->inDegree_ << ", "
@@ -360,8 +360,8 @@ public:
         static bool edgeEQ(Edge*& edge1, Edge*& edge2){
             return edge1->equals(edge2);
         }
-        string toString(){
-            stringstream os;
+        std::string toString(){
+            std::stringstream os;
             os << "E("
                     << this->from->vertex
                     << ","
@@ -382,12 +382,12 @@ public:
         typename DLinkedList<VertexNode*>::Iterator nodeIt;
         
     public:
-        Iterator(AbstractGraph<T>* pGraph=0, bool begin=true){
+        Iterator(AbstractGraph<T>* pGraph=nullptr, bool begin=true){
             if(begin) {
-                if(pGraph != 0) nodeIt = pGraph->nodeList.begin();
+                if(pGraph != nullptr) nodeIt = pGraph->nodeList.begin();
             }
             else{
-                if(pGraph != 0) nodeIt = pGraph->nodeList.end();
+                if(pGraph != nullptr) nodeIt = pGraph->nodeList.end();
             }
         }
         Iterator& operator=(const Iterator& iterator){

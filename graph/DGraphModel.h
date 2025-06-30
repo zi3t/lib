@@ -38,32 +38,32 @@ public:
     void connect(T from, T to, float weight=0){
         typename AbstractGraph<T>::VertexNode* nodeF = this->getVertexNode(from);
         typename AbstractGraph<T>::VertexNode* nodeT = this->getVertexNode(to);
-        if(nodeF == 0) throw VertexNotFoundException(this->vertex2Str(*nodeF));
-        if(nodeT == 0) throw VertexNotFoundException(this->vertex2Str(*nodeT));
+        if(nodeF == nullptr) throw VertexNotFoundException(this->vertex2Str(*nodeF));
+        if(nodeT == nullptr) throw VertexNotFoundException(this->vertex2Str(*nodeT));
         nodeF->connect(nodeT, weight);
     }
     void disconnect(T from, T to){
          typename AbstractGraph<T>::VertexNode* nodeF = this->getVertexNode(from);
         typename AbstractGraph<T>::VertexNode* nodeT = this->getVertexNode(to);
-        if(nodeF == 0) throw VertexNotFoundException(this->vertex2Str(*nodeF));
-        if(nodeT == 0) throw VertexNotFoundException(this->vertex2Str(*nodeT));
+        if(nodeF == nullptr) throw VertexNotFoundException(this->vertex2Str(*nodeF));
+        if(nodeT == nullptr) throw VertexNotFoundException(this->vertex2Str(*nodeT));
 
           typename AbstractGraph<T>::Edge* edge = nodeF->getEdge(nodeT);
-          if(edge == 0) throw EdgeNotFoundException(this->edge2Str(*edge));
+          if(edge == nullptr) throw EdgeNotFoundException(this->edge2Str(*edge));
           nodeF->removeTo(nodeT);
     }
     void remove(T vertex){
          typename AbstractGraph<T>::VertexNode* nodeA = this->getVertexNode(vertex);
-        if(nodeA == 0) throw VertexNotFoundException(this->vertex2Str(*nodeA));
+        if(nodeA == nullptr) throw VertexNotFoundException(this->vertex2Str(*nodeA));
 
         typename DLinkedList<typename AbstractGraph<T>::VertexNode*>::Iterator nodeIt;
         nodeIt = this->nodeList.begin();
         while(nodeIt != this->nodeList.end()) {
             typename AbstractGraph<T>::VertexNode* nodeB = *nodeIt;
             typename AbstractGraph<T>::Edge* edge = nodeB->getEdge(nodeA);
-            if(edge != 0) nodeB->removeTo(nodeA);
+            if(edge != nullptr) nodeB->removeTo(nodeA);
             edge = nodeA->getEdge(nodeB);
-            if(edge != 0) nodeA->removeTo(nodeB);
+            if(edge != nullptr) nodeA->removeTo(nodeB);
             nodeIt++;
         }
         this->nodeList.removeItem(nodeA);

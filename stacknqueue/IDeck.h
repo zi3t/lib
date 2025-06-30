@@ -13,6 +13,11 @@
 #ifndef STACKNQUEUE_IDECK_H_
 #define STACKNQUEUE_IDECK_H_
 
+#include <string>
+#include <sstream>
+using std::string;
+using std::stringstream;
+
 class Underflow: public std::exception{
 private:
     string desc;
@@ -39,7 +44,7 @@ public:
     virtual void clear()=0;
     virtual bool remove(T item)=0;
     virtual bool contains(T item)=0;
-    virtual string toString(string (*item2str)(T&)=0 )=0;
+    virtual string toString(string (*item2str)(T&) = nullptr )=0;
 };
 
 #endif /* IDECK_H */

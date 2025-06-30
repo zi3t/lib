@@ -16,7 +16,7 @@
 #include "heap/Heap.h"
 #include "util/Point.h"
 #include "util/sampleFunc.h"
-#include <math.h>
+#include <cmath>
 #include <string>
 #include <sstream>
 

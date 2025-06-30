@@ -19,8 +19,8 @@ class PriorityQueue: public Heap<T>{
 public:
     class Iterator;
     
-    PriorityQueue(  int (*comparator)(T& , T&)=0, 
-                    void (*removeData)(Heap<T>*)=0):
+    PriorityQueue(  int (*comparator)(T& , T&) = nullptr,
+                    void (*removeData)(Heap<T>*) = nullptr):
         Heap<T>(comparator, removeData){
     }
 };

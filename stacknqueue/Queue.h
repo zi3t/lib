@@ -3,6 +3,13 @@
 
 #include "list/DLinkedList.h"
 #include "stacknqueue/IDeck.h"
+#include <string>
+#include <sstream>
+#include <iostream>
+using std::string;
+using std::stringstream;
+using std::cout;
+using std::endl;
 
 template <class T>
 class Queue : public IDeck<T>
@@ -16,7 +23,7 @@ protected:
     bool (*itemEqual)(T &lhs, T &rhs);
 
 public:
-    Queue(void (*deleteUserData)(DLinkedList<T> *) = 0 ,bool (*itemEqual)(T &, T &) = 0)
+    Queue(void (*deleteUserData)(DLinkedList<T> *) = nullptr ,bool (*itemEqual)(T &, T &) = nullptr)
     {
         this->itemEqual = itemEqual;
         this->deleteUserData = deleteUserData;
@@ -71,14 +78,14 @@ public:
         return found;
     }
 
-    string toString(string (*item2str)(T &) = 0)
+    string toString(string (*item2str)(T &) = nullptr)
     {
         stringstream os;
         os << "FRONT-TO-REAR: " << list.toString(item2str);
         return os.str();
     }
 
-    void println(string (*item2str)(T &) = 0)
+    void println(string (*item2str)(T &) = nullptr)
     {
         cout << toString(item2str) << endl;
     }
@@ -96,7 +103,7 @@ public:
 private:
     static bool equals(T &lhs, T &rhs, bool (*itemEqual)(T &, T &))
     {
-        if (itemEqual == 0)
+        if (itemEqual == nullptr)
             return lhs == rhs;
         else
             return itemEqual(lhs, rhs);
@@ -110,15 +117,15 @@ public:
         Queue<T> *queue;
         typename DLinkedList<T>::Iterator listIt;
         public:
-         Iterator(Queue<T>* queue=0, bool begin=true){
+         Iterator(Queue<T>* queue = nullptr, bool begin=true){
             this->queue = queue;
             if(begin){
-                if(queue != 0) this->listIt = queue->list.begin();
-                else this->listIt = 0;
+                if(queue != nullptr) this->listIt = queue->list.begin();
+                else this->listIt = nullptr;
             }
             else{
-                if(queue != 0) this->listIt = queue->list.end();
-                else this->listIt = 0;
+                if(queue != nullptr) this->listIt = queue->list.end();
+                else this->listIt = nullptr;
             }
         }
         Iterator& operator=(const Iterator& iterator ){
@@ -144,7 +151,7 @@ public:
             ++*this; 
             return iterator; 
         }
-        void remove(void (*removeItem)(T)=0){
+        void remove(void (*removeItem)(T) = nullptr){
             listIt.remove(removeItem);
         }
     };

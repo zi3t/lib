@@ -16,7 +16,7 @@
 #include "stacknqueue/Stack.h"
 #include <iostream>
 #include <iomanip>
-using namespace std;
+
 
 void stackDemo1(){
     Stack<int> stack;
@@ -26,7 +26,7 @@ void stackDemo1(){
     stack.println();
     
     for(int i=-3; i < 10; i++){
-        cout <<"value " << i <<  " : " << (stack.contains(i) ? "in stack" : "not in stack") << endl;
+        std::cout <<"value " << i <<  " : " << (stack.contains(i) ? "in stack" : "not in stack") << std::endl;
     }
 }
 void stackDemo2(){
@@ -36,14 +36,14 @@ void stackDemo2(){
     
     stack.println();
     
-    cout << stack.contains(Point(23.2f, 25.4f)) << endl;
-    cout << stack.contains(Point(24.6f, 23.1f)) << endl;
-    cout << stack.contains(Point(123.2f, 25.4f)) << endl;
-    cout << stack.contains(Point(124.6f, 23.1f)) << endl;
+    std::cout << stack.contains(Point(23.2f, 25.4f)) << std::endl;
+    std::cout << stack.contains(Point(24.6f, 23.1f)) << std::endl;
+    std::cout << stack.contains(Point(123.2f, 25.4f)) << std::endl;
+    std::cout << stack.contains(Point(124.6f, 23.1f)) << std::endl;
 }
 
-string sPointPtr2Str(Point*& point){
-    stringstream os;
+std::std::string sPointPtr2Str(Point*& point){
+    std::stringstream os;
     os << "("   << point->getX() << ", "
                 << point->getY()
        << ")";
@@ -60,10 +60,10 @@ void stackDemo3(){
     Point* p4 = new Point(124.6f, 23.1f);
     stack.println(&sPointPtr2Str);
     
-    cout << stack.contains(new Point(23.2f, 25.4f)) << endl;
-    cout << stack.contains(new Point(24.6f, 23.1f)) << endl;
-    cout << stack.contains(new Point(123.2f, 25.4f)) << endl;
-    cout << stack.contains(new Point(124.6f, 23.1f)) << endl;
+    std::cout << stack.contains(new Point(23.2f, 25.4f)) << std::endl;
+    std::cout << stack.contains(new Point(24.6f, 23.1f)) << std::endl;
+    std::cout << stack.contains(new Point(123.2f, 25.4f)) << std::endl;
+    std::cout << stack.contains(new Point(124.6f, 23.1f)) << std::endl;
     
     delete p1; delete p2; delete p3; delete p4;
 }

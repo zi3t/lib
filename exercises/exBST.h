@@ -20,7 +20,7 @@
 #include <string>
 #include <sstream>
 
-using namespace std;
+
 
 struct Node{
     int key;
@@ -237,7 +237,7 @@ void bstNumNodesInLevels(){
     deleteTree(root);
 }
 
-#include <math.h>
+#include <cmath>
 #include "util/Point.h"
 #include "tree/BST.h"
 #include "list/DLinkedList.h"

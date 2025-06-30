@@ -16,7 +16,8 @@
 #include <iomanip>
 #include <string>
 #include <sstream>
-using namespace std;
+#include <cmath>
+
 
 #include "util/Point.h"
 #include "util/ArrayLib.h"
@@ -35,44 +36,44 @@ int maxHeapComparator(int& a, int& b){
 }
 
 int minHeapComparator(Point& a, Point& b){
-    float ra = sqrt(a.getX()*a.getX() + a.getY()*a.getY());
-    float rb = sqrt(b.getX()*b.getX() + b.getY()*b.getY());
+    float ra = std::sqrt(a.getX()*a.getX() + a.getY()*a.getY());
+    float rb = std::sqrt(b.getX()*b.getX() + b.getY()*b.getY());
     if (ra < rb) return -1;
     else if(ra > rb) return +1;
     else return 0;
 }
 int maxHeapComparator(Point& a, Point& b){
-    float ra = sqrt(a.getX()*a.getX() + a.getY()*a.getY());
-    float rb = sqrt(b.getX()*b.getX() + b.getY()*b.getY());
+    float ra = std::sqrt(a.getX()*a.getX() + a.getY()*a.getY());
+    float rb = std::sqrt(b.getX()*b.getX() + b.getY()*b.getY());
     if (ra < rb) return +1;
     else if(ra > rb) return -1;
     else return 0;
 }
 int minHeapComparator(Point*& a, Point*& b){
-    float ra = sqrt(a->getX()*a->getX() + a->getY()*a->getY());
-    float rb = sqrt(b->getX()*b->getX() + b->getY()*b->getY());
+    float ra = std::sqrt(a->getX()*a->getX() + a->getY()*a->getY());
+    float rb = std::sqrt(b->getX()*b->getX() + b->getY()*b->getY());
     if (ra < rb) return -1;
     else if(ra > rb) return +1;
     else return 0;
 }
 int maxHeapComparator(Point*& a, Point*& b){
-    float ra = sqrt(a->getX()*a->getX() + a->getY()*a->getY());
-    float rb = sqrt(b->getX()*b->getX() + b->getY()*b->getY());
+    float ra = std::sqrt(a->getX()*a->getX() + a->getY()*a->getY());
+    float rb = std::sqrt(b->getX()*b->getX() + b->getY()*b->getY());
     if (ra < rb) return +1;
     else if(ra > rb) return -1;
     else return 0;
 }
 ////////////////////////////////////////////////////////////
-string point2str(Point& point){
-    stringstream os;
+std::string point2str(Point& point){
+    std::stringstream os;
     os  << "("  << point.getX() 
                 << ", "
                 << point.getY()
         << ")";
     return os.str();
 }
-string point2str(Point*& point){
-    stringstream os;
+std::string point2str(Point*& point){
+    std::stringstream os;
     os  << "("  << point->getX() 
                 << ", "
                 << point->getY()
@@ -80,13 +81,13 @@ string point2str(Point*& point){
     return os.str();
 }
 
-string int2str(int& value){
-    stringstream os;
+std::string int2str(int& value){
+    std::stringstream os;
     os << value;
     return os.str();
 }
-string int2str(int*& value){
-    stringstream os;
+std::string int2str(int*& value){
+    std::stringstream os;
     os << *value;
     return os.str();
 }

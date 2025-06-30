@@ -15,18 +15,18 @@
 
 #include "list/DLinkedList.h"
 #include <string>
-using namespace std;
+#include <sstream>
 
 
 class KeyNotFound: public std::exception{
 private:
-    string desc;
+    std::string desc;
 public:
-    KeyNotFound(string desc){
+    KeyNotFound(std::string desc){
         this->desc = desc;
     }
     const char * what () const throw (){
-        stringstream os;
+        std::stringstream os;
         os << this->desc;
         return os.str().c_str();
     }
@@ -114,7 +114,7 @@ public:
     >> key2str(K& key): convert key to string; if not supplied then K must support extraction operator (<<)
     >> value2str(V& value): convert value to string; if not supplied then V must support extraction operator (<<)
     */
-    virtual string toString(string (*key2str)(K&)=0, string (*value2str)(V&)=0 )=0;
+    virtual std::string toString(std::string (*key2str)(K&)=nullptr, std::string (*value2str)(V&)=nullptr )=0;
     
     /*
      * keys(): return a set of keys stored in the map

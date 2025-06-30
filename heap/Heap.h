@@ -14,7 +14,7 @@
 #define HEAP_HEAP_H_
 #include "heap/IHeap.h"
 #include <iostream>
-#include <memory.h>
+#include <cstring>
 #include <sstream>
 
 /*
@@ -44,8 +44,8 @@ protected:
     void (*deleteUserData)(Heap<T> *pHeap); //see above
 
 public:
-    Heap(int (*comparator)(T &, T &) = 0,
-         void (*deleteUserData)(Heap<T> *) = 0);
+    Heap(int (*comparator)(T &, T &) = nullptr,
+         void (*deleteUserData)(Heap<T> *) = nullptr);
 
     Heap(const Heap<T> &heap);               //copy constructor
     Heap<T> &operator=(const Heap<T> &heap); //assignment operator
@@ -56,18 +56,18 @@ public:
     void push(T item);
     T pop();
     const T peek();
-    void remove(T item, void (*removeItemData)(T) = 0);
+    void remove(T item, void (*removeItemData)(T) = nullptr);
     bool contains(T item);
     int size();
     void heapify(T array[], int size);
     void clear();
     bool empty();
-    string toString(string (*item2str)(T &) = 0);
+    std::string toString(std::string (*item2str)(T &) = nullptr);
     //Inherit from IHeap: END
 
-    void println(string (*item2str)(T &) = 0)
+    void println(std::string (*item2str)(T &) = nullptr)
     {
-        cout << toString(item2str) << endl;
+        std::cout << toString(item2str) << std::endl;
     }
 
     Iterator begin()
@@ -100,7 +100,7 @@ private:
     }
     int compare(T &a, T &b)
     {
-        if (comparator != 0)
+        if (comparator != nullptr)
             return comparator(a, b);
         else
         {
@@ -135,12 +135,12 @@ public:
         int cursor;
 
     public:
-        Iterator(Heap<T> *heap = 0, bool begin = 0)
+        Iterator(Heap<T> *heap = nullptr, bool begin = false)
         {
             this->heap = heap;
-            if (begin && (heap != 0))
+            if (begin && (heap != nullptr))
                 cursor = 0;
-            if (!begin && (heap != 0))
+            if (!begin && (heap != nullptr))
                 cursor = heap->size();
         }
         Iterator &operator=(const Iterator &iterator)
@@ -171,7 +171,7 @@ public:
             ++*this;
             return iterator;
         }
-        void remove(void (*removeItemData)(T) = 0)
+        void remove(void (*removeItemData)(T) = nullptr)
         {
             this->heap->remove(this->heap->elements[cursor], removeItemData);
         }
@@ -279,7 +279,7 @@ void Heap<T>::remove(T item, void (*removeItemData)(T))
     if (foundIdx == -1)
         return;
 
-    if (removeItemData != 0)
+    if (removeItemData != nullptr)
         removeItemData(elements[foundIdx]);
 
     int remain = count - foundIdx - 1;
@@ -341,10 +341,10 @@ bool Heap<T>::empty()
 }
 
 template <class T>
-string Heap<T>::toString(string (*item2str)(T &))
+std::string Heap<T>::toString(std::string (*item2str)(T &))
 {
-    stringstream os;
-    if (item2str != 0)
+    std::stringstream os;
+    if (item2str != nullptr)
     {
         os << "[";
         for (int idx = 0; idx < count - 1; idx++)
@@ -457,7 +457,7 @@ int Heap<T>::getItem(T item)
 template <class T>
 void Heap<T>::removeInternalData()
 {
-    if (this->deleteUserData != 0)
+    if (this->deleteUserData != nullptr)
         deleteUserData(this); //clear users's data if they want
     delete[] elements;
 }

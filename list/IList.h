@@ -14,7 +14,7 @@
 #ifndef LIST_ILIST_H_
 #define LIST_ILIST_H_
 #include <string>
-using namespace std;
+
 
 template<class T>
 class IList{
@@ -43,7 +43,7 @@ public:
     
     
     /* removeItem(T item, void (*removeItemData)(T)=0): remove item stored in the list
-     *   >> removeItemData: a function pointer (maybe NULL, default),
+     *   >> removeItemData: a function pointer (maybe nullptr, default),
      *          that will be called inside of removeItem to delete the item's data stored in the list
      *   >> removeItemData, why need? because we DO NOT type T is a pointer or not.
      * 
@@ -51,7 +51,7 @@ public:
      *   >> true if "item" stored in the list; 
      *   >> otherwise, return false
      */
-    virtual bool    removeItem(T item, void (*removeItemData)(T)=0)=0;
+    virtual bool    removeItem(T item, void (*removeItemData)(T)=nullptr)=0;
     
     
     
@@ -94,7 +94,7 @@ public:
     
     virtual T search(T item){
            if (contains(item)) return item;
-           else return 0;
+           else return T{};
        }
 
     
@@ -103,7 +103,7 @@ public:
      *       Therefore, we need a pointer to a function
      *          that can convert the item (passed to that function) to a string
      */
-    virtual string  toString(string (*item2str)(T&)=0 )=0;
+    virtual std::string  toString(std::string (*item2str)(T&)=nullptr )=0;
 };
 #endif /* ILIST_H */
 

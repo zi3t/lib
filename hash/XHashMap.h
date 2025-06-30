@@ -17,8 +17,7 @@
 #include <iomanip>
 #include <string>
 #include <sstream>
-#include <memory.h>
-using namespace std;
+#include <cstring>
 template <class K, class V>
 class Pair
 {
@@ -60,10 +59,10 @@ public:
     XHashMap(
         int (*hashCode)(K &, int),
         float loadFactor = 0.75f,
-        bool (*valueEqual)(V &, V &) = 0,
-        void (*deleteValues)(XHashMap<K, V> *) = 0,
-        bool (*keyEqual)(K &, K &) = 0,
-        void (*deleteKeys)(XHashMap<K, V> *) = 0);
+        bool (*valueEqual)(V &, V &) = nullptr,
+        void (*deleteValues)(XHashMap<K, V> *) = nullptr,
+        bool (*keyEqual)(K &, K &) = nullptr,
+        void (*deleteKeys)(XHashMap<K, V> *) = nullptr);
 
     XHashMap(const XHashMap<K, V> &map);                  //copy constructor
     XHashMap<K, V> &operator=(const XHashMap<K, V> &map); //assignment operator
@@ -73,23 +72,23 @@ public:
     //Inherit from IMap:BEGIN
     V put(K key, V value);
     V &get(K key);
-    V remove(K key, void (*deleteKeyInMap)(K) = 0);
-    bool remove(K key, V value, void (*deleteKeyInMap)(K) = 0, void (*deleteValueInMap)(V) = 0);
+    V remove(K key, void (*deleteKeyInMap)(K) = nullptr);
+    bool remove(K key, V value, void (*deleteKeyInMap)(K) = nullptr, void (*deleteValueInMap)(V) = nullptr);
     bool containsKey(K key);
     bool containsValue(V value);
     bool empty();
     int size();
     void clear();
-    string toString(string (*key2str)(K &) = 0, string (*value2str)(V &) = 0);
+    std::string toString(std::string (*key2str)(K &) = nullptr, std::string (*value2str)(V &) = nullptr);
     DLinkedList<K> keys();
     DLinkedList<V> values();
     DLinkedList<int> clashes();
     //Inherit from IMap:END
 
-    //Show map on screen: need to convert key to string (key2str) and value2str
-    void println(string (*key2str)(K &) = 0, string (*value2str)(V &) = 0)
+    //Show map on screen: need to convert key to std::string (key2str) and value2str
+    void println(std::string (*key2str)(K &) = nullptr, std::string (*value2str)(V &) = nullptr)
     {
-        cout << this->toString(key2str, value2str) << endl;
+        std::cout << this->toString(key2str, value2str) << std::endl;
     }
     int getCapacity()
     {
@@ -111,7 +110,7 @@ public:
         for (int idx = 0; idx < pMap->capacity; idx++)
         {
             Entry *entry = pMap->table[idx];
-            while (entry != 0)
+            while (entry != nullptr)
             {
                 delete entry->key;
                 entry = entry->next;
@@ -123,7 +122,7 @@ public:
         for (int idx = 0; idx < pMap->capacity; idx++)
         {
             Entry *entry = pMap->table[idx];
-            while (entry != 0)
+            while (entry != nullptr)
             {
                 delete entry->value;
                 entry = entry->next;
@@ -141,14 +140,14 @@ protected:
 
     bool keyEQ(K &lhs, K &rhs)
     {
-        if (keyEqual != 0)
+        if (keyEqual != nullptr)
             return keyEqual(lhs, rhs);
         else
             return lhs == rhs;
     }
     bool valueEQ(V &lhs, V &rhs)
     {
-        if (valueEqual != 0)
+        if (valueEqual != nullptr)
             return valueEqual(lhs, rhs);
         else
             return lhs == rhs;
@@ -171,10 +170,10 @@ public:
     public:
         Entry()
         {
-            this->prev = 0;
-            this->next = 0;
+            this->prev = nullptr;
+            this->next = nullptr;
         }
-        Entry(K key, V value, Entry *prev = 0, Entry *next = 0)
+        Entry(K key, V value, Entry *prev = nullptr, Entry *next = nullptr)
         {
             this->key = key;
             this->value = value;
@@ -245,7 +244,7 @@ V XHashMap<K, V>::put(K key, V value)
     int index = this->hashCode(key, capacity);
     Entry *entry = table[index];
 
-    while (entry != 0)
+    while (entry != nullptr)
     {
         if (keyEQ(entry->key, key))
         {
@@ -258,7 +257,7 @@ V XHashMap<K, V>::put(K key, V value)
 
     //add to table, at head
     Entry *newEntry = new Entry(key, value, 0, table[index]);
-    if (table[index] != 0)
+    if (table[index] != nullptr)
         table[index]->prev = newEntry;
     table[index] = newEntry;
     count += 1;
@@ -274,12 +273,12 @@ void XHashMap<K, V>::moveEntries(Entry **oldTable, int oldCapacity,
     for (int old_index = 0; old_index < oldCapacity; old_index++)
     {
         Entry *oldEntry = oldTable[old_index];
-        while (oldEntry != 0)
+        while (oldEntry != nullptr)
         {
             int new_index = this->hashCode(oldEntry->key, newCapacity);
 
             Entry *newEntry = new Entry(oldEntry->key, oldEntry->value, 0, newTable[new_index]);
-            if (newTable[new_index] != 0)
+            if (newTable[new_index] != nullptr)
                 newTable[new_index]->prev = newEntry;
             newTable[new_index] = newEntry;
 
@@ -294,7 +293,7 @@ V &XHashMap<K, V>::get(K key)
     //YOUR CODE HERE
     int index = hashCode(key, capacity);
     Entry *entry = table[index];
-    while (entry != 0)
+    while (entry != nullptr)
     {
         if (keyEQ(entry->key, key))
         {
@@ -304,7 +303,7 @@ V &XHashMap<K, V>::get(K key)
     }
 
      //key: not found
-    stringstream os;
+    std::stringstream os;
     //OLD: os << "key (" << entry->key << ") is not found";
     os << "key (" << key << ") is not found";
     throw KeyNotFound(os.str());
@@ -317,32 +316,32 @@ V XHashMap<K, V>::remove(K key, void (*deleteKeyInMap)(K))
     //YOUR CODE HERE
     int index = hashCode(key, capacity);
     Entry *entry = table[index];
-    while (entry != 0)
+    while (entry != nullptr)
     {
         /* code */
         if (keyEQ(entry->key, key))
         {
             count -= 1;
-            if (entry->prev == 0)
+            if (entry->prev == nullptr)
             {
                 Entry *newHead = entry->next;
-                if (newHead != 0)
-                    newHead->prev = 0;
+                if (newHead != nullptr)
+                    newHead->prev = nullptr;
                 table[index] = newHead;
-                entry->next = 0;
+                entry->next = nullptr;
                 V temp = entry->value;
-                if (deleteKeyInMap != 0)
+                if (deleteKeyInMap != nullptr)
                     deleteKeyInMap(entry->key);
                 delete entry;
                 return temp;
             }
-            else if (entry->next == 0)
+            else if (entry->next == nullptr)
             {
                 Entry *prev = entry->prev;
-                prev->next = 0;
-                entry->prev = 0;
+                prev->next = nullptr;
+                entry->prev = nullptr;
                 V temp = entry->value;
-                if (deleteKeyInMap != 0)
+                if (deleteKeyInMap != nullptr)
                     deleteKeyInMap(entry->key);
                 delete entry;
                 return temp;
@@ -351,9 +350,9 @@ V XHashMap<K, V>::remove(K key, void (*deleteKeyInMap)(K))
             {
                 entry->prev->next = entry->next;
                 entry->next->prev = entry->prev;
-                entry->prev = entry->next = 0;
+                entry->prev = entry->next = nullptr;
                 V temp = entry->value;
-                if (deleteKeyInMap != 0)
+                if (deleteKeyInMap != nullptr)
                     deleteKeyInMap(entry->key);
                 delete entry;
                 return temp;
@@ -362,7 +361,7 @@ V XHashMap<K, V>::remove(K key, void (*deleteKeyInMap)(K))
     }
 
     //IF key: not found
-    stringstream os;
+    std::stringstream os;
     os << "key (" << entry->key << ") is not found";
     throw KeyNotFound(os.str());
 }
@@ -373,35 +372,35 @@ bool XHashMap<K, V>::remove(K key, V value, void (*deleteKeyInMap)(K), void (*de
     //YOUR CODE HERE
     int index = hashCode(key, capacity);
     Entry *entry = table[index];
-    while (entry != 0)
+    while (entry != nullptr)
     {
         if (keyEQ(entry->key, key) && valueEQ(entry->value, value))
         {
             count -= 1;
-            if (entry->prev == 0)
+            if (entry->prev == nullptr)
             {
                 Entry *newHead = entry->next;
-                if (newHead != 0)
-                    newHead->prev = 0;
+                if (newHead != nullptr)
+                    newHead->prev = nullptr;
                 table[index] = newHead;
-                entry->next = 0;
+                entry->next = nullptr;
 
-                if (deleteKeyInMap != 0)
+                if (deleteKeyInMap != nullptr)
                     deleteKeyInMap(entry->key);
-                if (deleteValueInMap != 0)
+                if (deleteValueInMap != nullptr)
                     deleteValueInMap(entry->value);
                 delete entry;
                 return true;
             }
-            else if (entry->next == 0)
+            else if (entry->next == nullptr)
             {
                 Entry *prev = entry->prev;
-                prev->next = 0;
-                entry->prev = 0;
+                prev->next = nullptr;
+                entry->prev = nullptr;
 
-                if (deleteKeyInMap != 0)
+                if (deleteKeyInMap != nullptr)
                     deleteKeyInMap(entry->key);
-                if (deleteValueInMap != 0)
+                if (deleteValueInMap != nullptr)
                     deleteValueInMap(entry->value);
                 delete entry;
                 return true;
@@ -410,11 +409,11 @@ bool XHashMap<K, V>::remove(K key, V value, void (*deleteKeyInMap)(K), void (*de
             {
                 entry->prev->next = entry->next;
                 entry->next->prev = entry->prev;
-                entry->prev = entry->next = 0;
+                entry->prev = entry->next = nullptr;
 
-                if (deleteKeyInMap != 0)
+                if (deleteKeyInMap != nullptr)
                     deleteKeyInMap(entry->key);
-                if (deleteValueInMap != 0)
+                if (deleteValueInMap != nullptr)
                     deleteValueInMap(entry->value);
                 delete entry;
                 return true;
@@ -431,7 +430,7 @@ bool XHashMap<K, V>::containsKey(K key)
     //YOUR CODE HERE
     int index = hashCode(key, capacity);
     Entry *entry = table[index];
-    while (entry != 0)
+    while (entry != nullptr)
     {
         if (keyEQ(entry->key, key))
             return true;
@@ -447,7 +446,7 @@ bool XHashMap<K, V>::containsValue(V value)
     for (int idx = 0; idx < capacity; idx++)
     {
         Entry *entry = table[idx];
-        while (entry != 0)
+        while (entry != nullptr)
         {
             if (valueEQ(entry->value, value))
                 return true;
@@ -481,33 +480,33 @@ void XHashMap<K, V>::clear()
     this->table = new Entry *[capacity];
     for (int idx = 0; idx < capacity; idx++)
     {
-        this->table[idx] = 0;
+        this->table[idx] = nullptr;
     }
 }
 
 template <class K, class V>
-string XHashMap<K, V>::toString(string (*key2str)(K &), string (*value2str)(V &))
+std::string XHashMap<K, V>::toString(std::string (*key2str)(K &), std::string (*value2str)(V &))
 {
-    stringstream os;
-    string mark(50, '=');
-    os << mark << endl;
-    os << setw(12) << left << "capacity: " << capacity << endl;
-    os << setw(12) << left << "size: " << count << endl;
+    std::stringstream os;
+    std::string mark(50, '=');
+    os << mark << std::endl;
+    os << std::setw(12) << std::left << "capacity: " << capacity << std::endl;
+    os << std::setw(12) << std::left << "size: " << count << std::endl;
     for (int idx = 0; idx < capacity; idx++)
     {
         Entry *entry = table[idx];
-        os << setw(4) << left << idx << ": ";
-        stringstream itemos;
-        while (entry != 0)
+        os << std::setw(4) << std::left << idx << ": ";
+        std::stringstream itemos;
+        while (entry != nullptr)
         {
             itemos << " (";
 
-            if (key2str != 0)
+            if (key2str != nullptr)
                 itemos << key2str(entry->key);
             else
                 itemos << entry->key;
             itemos << ",";
-            if (value2str != 0)
+            if (value2str != nullptr)
                 itemos << value2str(entry->value);
             else
                 itemos << entry->value;
@@ -517,12 +516,12 @@ string XHashMap<K, V>::toString(string (*key2str)(K &), string (*value2str)(V &)
             //next entry:
             entry = entry->next;
         }
-        string valuestr = itemos.str();
+        std::string valuestr = itemos.str();
         if (valuestr.length() > 0)
             valuestr = valuestr.substr(0, valuestr.length() - 1);
-        os << valuestr << endl;
+        os << valuestr << std::endl;
     }
-    os << mark << endl;
+    os << mark << std::endl;
 
     return os.str();
 }
@@ -535,7 +534,7 @@ DLinkedList<K> XHashMap<K, V>::keys()
     for (int idx = 0; idx < capacity; idx++)
     {
         Entry *entry = table[idx];
-        while (entry != 0)
+        while (entry != nullptr)
         {
             list.add(entry->key);
             entry = entry->next;
@@ -552,7 +551,7 @@ DLinkedList<V> XHashMap<K, V>::values()
     for (int idx = 0; idx < capacity; idx++)
     {
         Entry *entry = table[idx];
-        while (entry != 0)
+        while (entry != nullptr)
         {
             list.add(entry->value);
             entry = entry->next;
@@ -569,7 +568,7 @@ DLinkedList<int> XHashMap<K, V>::clashes()
     {
         Entry *entry = table[idx];
         int count = 0;
-        while (entry != 0)
+        while (entry != nullptr)
         {
             count += 1;
             entry = entry->next;
@@ -587,7 +586,7 @@ void XHashMap<K, V>::ensureLoadFactor(int current_size)
 {
     int maxSize = (int)(loadFactor * capacity);
 
-    //cout << "ensureLoadFactor: count = " << count << "; maxSize = " << maxSize << endl;
+    //std::cout << "ensureLoadFactor: count = " << count << "; maxSize = " << maxSize << std::endl;
     if (current_size >= maxSize)
     {
         //grow: oldCapacity >> 1 (= oldCapacity/2)
@@ -601,8 +600,8 @@ void XHashMap<K, V>::ensureLoadFactor(int current_size)
 template <class K, class V>
 void XHashMap<K, V>::rehash(int newCapacity)
 {
-    //cout << "REHASH-BEGIN: old-capacity<-" << capacity << "; lf<-" << ((float)count/capacity) << "; new-capacity<-" << newCapacity << endl;
-    //cout << "current count: " << count << endl;
+    //std::cout << "REHASH-BEGIN: old-capacity<-" << capacity << "; lf<-" << ((float)count/capacity) << "; new-capacity<-" << newCapacity << std::endl;
+    //std::cout << "current count: " << count << std::endl;
     Entry **oldTable = this->table;
     int oldCapacity = capacity;
 
@@ -612,7 +611,7 @@ void XHashMap<K, V>::rehash(int newCapacity)
 
     for (int idx = 0; idx < newCapacity; idx++)
     {
-        this->table[idx] = 0; //reset table to nullptr
+        this->table[idx] = nullptr; //reset table to nullptr
     }
 
     //Move entries to new table from old table
@@ -622,7 +621,7 @@ void XHashMap<K, V>::rehash(int newCapacity)
     for (int idx = 0; idx < oldCapacity; idx++)
     {
         Entry *entry = oldTable[idx];
-        while (entry != 0)
+        while (entry != nullptr)
         {
             Entry *next = entry->next;
             delete entry;
@@ -637,16 +636,16 @@ template <class K, class V>
 void XHashMap<K, V>::removeInternalData()
 {
     //Remove user's data
-    if (deleteKeys != 0)
+    if (deleteKeys != nullptr)
         deleteKeys(this);
-    if (deleteValues != 0)
+    if (deleteValues != nullptr)
         deleteValues(this);
 
     //Remove all entries in the current map
     for (int idx = 0; idx < this->capacity; idx++)
     {
         Entry *entry = this->table[idx];
-        while (entry != 0)
+        while (entry != nullptr)
         {
             Entry *next = entry->next;
             delete entry;
@@ -681,7 +680,7 @@ void XHashMap<K, V>::copyMapFrom(const XHashMap<K, V> &map)
     for (int idx = 0; idx < map.capacity; idx++)
     {
         Entry *entry = map.table[idx];
-        while (entry != 0)
+        while (entry != nullptr)
         {
             this->put(entry->key, entry->value);
             entry = entry->next;
