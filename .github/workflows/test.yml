@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: Install lint tools
+      run: pip install cpplint
+    - name: Run cpplint
+      run: cpplint $(git ls-files '*.cpp' '*.h')
     - name: Install build tools
       run: sudo apt-get update && sudo apt-get install -y g++
     - name: Compile tests
